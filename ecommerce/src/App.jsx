@@ -7,7 +7,7 @@ import Contact from './Contact'
 import SingleProduct from './SingleProduct'
 import Cart from './Cart'
 import Error from './Error'
-import Header from './component/Header'
+import Navigation from './component/navigation'
 import './App.css'
 
 const App = () => {
@@ -17,8 +17,9 @@ const App = () => {
             {
             //2: naviagarion bar jo hamesha app har page ke top pe rakhna chatey hai to usay
             // Routes ke uppar or Router ke nichay likho
+
            }
-              <Header/>
+             <Navigation/>
 
           <Routes>
          
