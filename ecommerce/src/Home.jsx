@@ -1,8 +1,15 @@
 import React from 'react'
+import Herosection from './component/Herosection'
 
 const Home = () => {
+  const data= {
+    name:"E Shoping Store",
+};
   return (
-    <div>Home</div>
+    <>
+        <Herosection data={data}/>
+       
+    </>
   )
 }
 
