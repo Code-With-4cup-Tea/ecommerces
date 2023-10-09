@@ -29,7 +29,14 @@ const Herocontainer = styled.section`
             height:60vh;
             display:flex;
             justify-content:center;
+            background-color:#c2c2c23a;
             
+            @media (max-width:425px) {
+                        flex-direction:column;
+                        height:100vh;
+                       
+                
+            }
            
             
            
@@ -45,11 +52,21 @@ const Leftcontainer = styled.div`
             flex-direction:column;
             padding-left:8rem;
            
+            @media (max-width:425px) {
+                        width:100%;
+                        padding:1rem;
+                
+            }
            
             .p1{
                 font-size:0.7rem;
                 font-weight:900;
                 margin-top:4rem;
+
+                @media (max-width:425px) {
+                      
+                       margin-top:5rem;
+            }
                 
             }
 
@@ -77,7 +94,10 @@ const Rightcontainer = styled.div`
             
             display:flex;
             justify-content:center;
-          
+            @media (max-width:425px) {
+                      
+                      width:100%;
+           }
             
             
             img{
@@ -85,6 +105,13 @@ const Rightcontainer = styled.div`
                 height:20rem;
                 margin-top:2rem;
                 animation: imgUp 0.7s linear infinite alternate;
+
+                @media (max-width:425px) {
+                      
+                      margin-top:0.5rem;
+                     
+                                        }
+
             }
 
             
@@ -95,7 +122,7 @@ const Rightcontainer = styled.div`
                   }}
     
 `
-const Button = styled.button`
+export const Button = styled.button`
                 border:none;
                 margin-top:0.5rem;
                 background-color:#FF9900;

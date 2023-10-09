@@ -1,5 +1,8 @@
 import React from 'react'
 import Herosection from './component/Herosection'
+import Howwework from './component/Howwework';
+import Ourcompany from './component/Ourcompany';
+
 
 const Home = () => {
   const data= {
@@ -8,6 +11,9 @@ const Home = () => {
   return (
     <>
         <Herosection data={data}/>
+        <Howwework/>
+        <Ourcompany/>
+
        
     </>
   )
