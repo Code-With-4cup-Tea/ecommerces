@@ -8,6 +8,7 @@ import SingleProduct from './SingleProduct'
 import Cart from './Cart'
 import Error from './Error'
 import Navigation from './component/navigation'
+import Footer from './component/Footer'
 import './App.css'
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
 
 
           </Routes>
+          <Footer/>
       </Router>
     </>
   )
