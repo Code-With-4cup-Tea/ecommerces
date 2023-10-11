@@ -25,9 +25,11 @@ const Featureimage = (curElem) => {
 export default Featureimage
 
 const Card = styled.div`
+           
+
        
 
-        .img{
+        /* .img{
             position:relative;
 
             .caption{
@@ -57,6 +59,6 @@ const Card = styled.div`
         
         
        }
-           
+            */
           
 `

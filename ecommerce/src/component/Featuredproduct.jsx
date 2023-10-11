@@ -21,9 +21,12 @@ if(isLoading){
     <>
         <Featurecontainer>
             {/* <Inner> */}
-                        <p>CHECK NOW</p>
-                    <h2>Our Feature Services</h2>
+                        {/* <p>CHECK NOW</p>
+                    <h2>Our Feature Services</h2> */}
                     <Product>
+                    <p>CHECK NOW</p>
+                    <h2>Our Feature Services</h2>
+                        <div className="productdiv">
                         {
                             featureProducts.map((currElm)=>{
                                 console.log(currElm);
@@ -31,6 +34,7 @@ if(isLoading){
 
                             })
                         }
+                        </div>
                     </Product>
             {/* </Inner> */}
         </Featurecontainer>
@@ -46,10 +50,6 @@ const Featurecontainer =styled.div`
      background-color:#c2c2c23a;
     margin-top:3rem;
     padding-top:1rem;
-
-
-
-
 `
 
 // const Inner = styled.div`
@@ -60,19 +60,59 @@ const Featurecontainer =styled.div`
     
 // `
 const Product =styled.div`
-         width:100%;
-       
+         width:60%;
+        margin:0 auto;
         display:flex;
-        gap:1rem;
-        padding:1rem;
-       
+        flex-direction:column;
+        gap:0.2rem;
         
-        a{
-            color:orange;
-            text-decoration:none;
+
+       .productdiv{
+            display:flex;
+            width:100%;
+            gap:1rem;
+            /* flex-wrap:wrap; */
+            /* background-color:red; */
+            .img{
+                /* background-color:black; */
+                position:relative;
+
+                .caption{
+              position:absolute;
+              top:5px;
+              right:5px;
+              color:white;
+              font-size:1rem;
+              background-color:black;
+              padding:3px; 
+       }
+            }
+            .img img{
+            width:100%;
+            &:hover{
+            scale:101%;
+        }
+            
         }
 
-        /* &:hover{
-            background-color:rgb(98,84,243);
-        } */
+        .lowdata{
+            display:flex;
+           justify-content:space-between;
+        }
+
+        a{
+            text-decoration:none;
+            color:orange;
+            font-size:1rem;
+        }
+
+        
+       }
+        
+        
+
+
+       
+        
+       
 `
