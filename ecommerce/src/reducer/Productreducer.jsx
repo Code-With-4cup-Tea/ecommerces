@@ -31,7 +31,7 @@ const ProductReducer =(state,action)=>{
                     return {
                         ...state,
                         isLoading:false,
-                        Products:action.payload,
+                        Products:action.payload,  //all data in side Products
                         featureProducts:featureData,
                     }
                     
