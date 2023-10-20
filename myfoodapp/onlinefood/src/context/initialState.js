@@ -3,4 +3,3 @@ export const initialState = {
     
 
 }
-console.log("inside initial state")

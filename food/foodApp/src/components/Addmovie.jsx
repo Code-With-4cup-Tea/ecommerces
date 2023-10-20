@@ -1,5 +1,9 @@
 import { useReducer } from "react";
 import React from "react";
+import Title from "./Title";
+import Reset from "./Reset";
+import UserContext from "../context/userContext";
+
 
 const initialState = [
  
@@ -10,7 +14,7 @@ function init(){
   return initialState;
 }
 
-const ACTION_TYPE={
+export const ACTION_TYPE={
   ADD_TASK:'add_task',
   DELETE_TASK:'delete_task',
   RESET_TODOS:"reset_todos"
@@ -46,12 +50,17 @@ const Addmovie = ()=>{
 
   const[state,dispatch] = useReducer(reducer,initialState,init)
 
+  const data={
+    state,dispatch
+  }
+
   return(
+    <UserContext.Provider value={data}>
           <div className="flex justify-center items-center mt-3 flex-col w-[300px] h-[300px] mr-auto text-red-600 ">
-             <h1 > ToDo List {state.length}</h1>
+             <Title />
              Name:
              <input type="text" onBlur={(e)=>dispatch({type:ACTION_TYPE.ADD_TASK,payload:e.target.value })}/>
-             <button onClick={()=>dispatch({type:ACTION_TYPE.RESET_TODOS,payload:initialState})}>RESET</button>
+             <Reset dispatch={dispatch} initialState={initialState}/>
              {
               state.map((datas)=>
               <li key={datas.id} >{datas.name}
@@ -62,6 +71,7 @@ const Addmovie = ()=>{
               )
              }
         </div>
+        </UserContext.Provider>
   )
   
 
