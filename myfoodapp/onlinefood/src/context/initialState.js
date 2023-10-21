@@ -1,5 +1,9 @@
+import { fetchData } from "../utils/Fetchdata"
+
+const gotuserdata = fetchData();
+
 export const initialState = {
-    user: null,
+    user: gotuserdata,
     
 
 }

@@ -1,4 +1,4 @@
-import {  createContext, useContext,useReducer} from "react";
+import {  createContext, useContext,useReducer, useState} from "react";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase.config'
 import reducer from "../reducer/Userrreducer";
@@ -25,9 +25,12 @@ const UserContextProvider = ({children})=>{
     //   const  userdata={
     //         user,dispatch
     //     }
+    const [active,setActive] = useState(false);
+    
 
      const login = async ()=>{
-        // const {user:{refreshToken,providerData}} = await signInWithPopup(firebaseauth,provider);
+        if(!user){
+            // const {user:{refreshToken,providerData}} = await signInWithPopup(firebaseauth,provider);
         // console.log(providerData[0])
         // const data = await signInWithPopup(firebaseauth,provider)
         // console.log(data);
@@ -48,9 +51,21 @@ const UserContextProvider = ({children})=>{
             user:providerData[0]
         })
         localStorage.setItem("datastore",JSON.stringify(providerData[0]))
+        }else{
+            setActive(!active)
+        }
     }
+
     
-    return <UserContext.Provider value={{user,dispatch,login}} > 
+    const logout = () =>{
+          setActive(false);
+          localStorage.clear();
+          dispatch({
+            type:ACTION_TYPE.SET_USER,
+            user:null
+          });
+    }
+    return <UserContext.Provider value={{user,dispatch,login,active,logout}} > 
             {children}
     </UserContext.Provider>
 }

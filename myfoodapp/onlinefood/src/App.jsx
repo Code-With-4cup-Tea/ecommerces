@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion"
 console.log("this is app.jsx")
 const App = () => {
   return (
-    <> <AnimatePresence>
+    <> <AnimatePresence >
         <div className='w-full h-auto bg-primary flex flex-col'>
               <Header/>
             <main className='mt-24 p-8 w-full'>
