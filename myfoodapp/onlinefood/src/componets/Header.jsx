@@ -109,6 +109,12 @@ const Header = () => {
                     </div>
             {/* for mobile */}
             <div className='flex items-center justify-between md:hidden w-full h-full'>
+            
+                            <div className='flex items-center relative'>
+                                     <BiCart className=' text-2xl'/>
+                                     <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center absolute -top-2 -right-0.5'>2</p>
+                                </div>
+
                             <Link to='/' className='flex justify-center items-center gap-2'>
                                 <img src={logo} alt="logo" className='w-12 object-cover'/>
                                 <p className= 'text-orange-500 font-bold'>Bhukha<span className='text-yellow-500'> शेर</span></p>

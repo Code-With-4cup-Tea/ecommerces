@@ -1,0 +1,153 @@
+import React from 'react'
+import strawberry from '../images/strawberry.png'
+import burger from '../images/burger.png'
+import strawberrycake from '../images/strawberry-cake.png'
+import salad from '../images/salad.png'
+import pizza from '../images/pizza.png'
+import friedchicken from '../images/fried-chicken.png'
+import fast from '../images/fast.png'
+import homeimg from '../images/homeimg.png'
+import tomato from '../images/tomato.png'
+import bay from '../images/bay.png'
+import coldrink from '../images/cold-drink.png'
+import french from '../images/french-fries.png'
+import {motion} from 'framer-motion'
+
+
+const Maincontainer = () => {
+  return (
+     <div className='grid grid-cols-1 md:grid-cols-2 gap-2  '>
+        <div className=' pt-12 pl-4'>
+             <div>
+                  <div className='flex justify-start items-center gap-2 bg-orange-200 rounded-2xl w-[40%] md:w-[28%] '>
+                      <p className='font-extrabold ml-2 text-orange-600'>fast delivery</p>
+                      <img src={fast} alt="fast" className='h-8 bg-white rounded-full shadow-lg' />
+                  </div>
+              </div>
+                      <h1 className='font-extrabold text-5xl leading-tight mt-8'>The Best</h1>
+                      <h1 className='font-extrabold text-5xl leading-tight'>Delicious food</h1>
+                      <h3 className='tracking-[.61em]'>that meets you needs</h3>
+              <div className='grid grid-cols-5 md:w-[65%] mt-10'>
+                 
+                 <div className=' rounded-[30px] '>
+                      <img src={burger} alt="burger" className=' h-12' />
+                 </div>
+
+                 <div className=' rounded-[30px]'>
+                      <img src={strawberrycake} alt="strawberrycake" className=' h-12' />
+                 </div>
+
+                 <div className=' rounded-[30px] '>
+                      <img src={salad} alt="salad" className=' h-12' />
+                 </div>
+
+                 <div className=' rounded-[30px] '>
+                      <img src={pizza} alt="pizza" className=' h-12' />
+                 </div>
+
+                 <div className=' rounded-[30px] '>
+                      <img src={friedchicken} alt="friedchicken" className=' h-12' />
+                 </div>
+              </div>
+
+              <div >
+                    <button className='mt-8 rounded-md bg-gradient-to-br from-orange-400 to-orange-500 w-full px-4 py-2 hover:shadow-lg transition-all ease-in-out duration-100 md:w-auto font-extrabold'>Order Now</button>
+              </div>
+              
+        </div>
+        <div className=' flex flex-1 items-center relative'>
+
+                    <img src={homeimg} alt="homeimg" className=' ml-auto md:h-420' />
+                    <motion.img 
+                     initial={{ x:0 }}
+                     animate={{x:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={strawberry} alt="strawberry" className='h-12 absolute md:top-10 md:left-56' />
+                    <motion.img
+                    initial={{ x:0 }}
+                     animate={{x:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={tomato} alt="tomato" className='h-5 absolute md:top-16 md:left-44' />
+                    <motion.img 
+                    initial={{ y:0 }}
+                     animate={{y:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                    src={tomato} alt="tomato" className='h-8 absolute md:top-28 md:left-52' />
+                    <motion.img
+                    initial={{ y:0 }}
+                     animate={{y:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={bay} alt="bay" className='h-4 absolute md:top-10 md:left-14' />
+                    <motion.img
+                    initial={{ x:0 }}
+                     animate={{x:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={bay} alt="bay" className='h-7 absolute md:top-20 md:left-24' />
+                    <motion.img
+                    initial={{ y:0 }}
+                     animate={{y:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={bay} alt="bay" className='h-3 absolute md:top-32 md:left-14' />
+
+                    <motion.img
+                    initial={{ y:0 }}
+                     animate={{y:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:6,
+                         ease:"linear"
+                     }}
+                     src={coldrink} alt="coldrink" className='h-10 absolute md:bottom-10 md:right-10' />
+
+                    <motion.img
+                    initial={{ x:0 }}
+                     animate={{x:[-5, 5,-5]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:4,
+                         ease:"linear"
+                     }}
+                     src={french} alt="french" className='h-10 absolute md:bottom-16 md:left-52' />
+
+               <motion.div 
+               initial={{ y:0 }}
+                     animate={{y:[-10, 1,-10]}}
+                     transition={{
+                         repeat:Infinity,
+                         duration:2,
+                         ease:"linear"
+                     }}
+               className='bg-white rounded-[50%] p-5 absolute md:-bottom-7 border-4  border-solid  border-orange-500 md:right-40 '>
+                    <p className='font-extrabold text-3xl'>30%</p>
+                    <p className='font-extrabold text-4xl'>off</p>
+               </motion.div>
+        </div>
+     </div>
+  )
+}
+
+export default Maincontainer
