@@ -1,3 +1,4 @@
+
 import React from 'react'
 import strawberry from '../images/strawberry.png'
 import burger from '../images/burger.png'
@@ -13,10 +14,9 @@ import coldrink from '../images/cold-drink.png'
 import french from '../images/french-fries.png'
 import {motion} from 'framer-motion'
 
-
-const Maincontainer = () => {
+const Hometopbaner = () => {
   return (
-     <div className='grid grid-cols-1 md:grid-cols-2 gap-2  '>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-2  '>
         <div className=' pt-12 pl-4  '>
             
                   <div className='flex justify-start items-center  px-2 py-1 gap-2 rounded-full md:w-[50%]'>
@@ -152,4 +152,4 @@ const Maincontainer = () => {
   )
 }
 
-export default Maincontainer
+export default Hometopbaner

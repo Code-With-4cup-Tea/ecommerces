@@ -95,7 +95,7 @@ const Header = () => {
                                                 {
                                                     user && user.email === "itshakti2017@gmail.com" && (
                                                         <Link to={"/createitem"}>
-                                                        <button className='flex justify-center items-center gap-1  hover:text-orange-500'>Add_Item <LiaUserEditSolid/></button>
+                                                        <button className='flex justify-center items-center gap-1  hover:text-orange-500' onClick={()=>isSetmenu(false)}>Add_Item <LiaUserEditSolid/></button>
                                                         </Link>
                                                     )
                                                 }
@@ -134,7 +134,7 @@ const Header = () => {
                                                 {
                                                     user && user.email === "itshakti2017@gmail.com" && (
                                                         <Link to={"/createitem"}>
-                                                        <button className='flex justify-center items-center gap-1  hover:text-orange-500'>Add_Item <LiaUserEditSolid/></button>
+                                                        <button className='flex justify-center items-center gap-1  hover:text-orange-500' onClick={()=>isSetmenu(false)}>Add_Item <LiaUserEditSolid/></button>
                                                         </Link>
                                                     )
                                                 }
