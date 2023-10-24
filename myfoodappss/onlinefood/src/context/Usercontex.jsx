@@ -65,7 +65,7 @@ const UserContextProvider = ({children})=>{
             user:null
           });
     }
-    return <UserContext.Provider value={{user,dispatch,login,active,logout}} > 
+    return <UserContext.Provider value={{user,dispatch,login,active,logout,setActive}} > 
             {children}
     </UserContext.Provider>
 }
