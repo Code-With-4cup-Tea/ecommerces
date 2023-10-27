@@ -3,6 +3,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {IoFastFoodSharp} from 'react-icons/io5'
 import { categories } from './data'
+import Loader from './Loader'
+import {BiSolidCloudUpload} from 'react-icons/bi'
+import {MdDelete} from 'react-icons/md'
+import {TbFileDescription} from 'react-icons/tb'
+import {FaRupeeSign} from 'react-icons/fa'
 
 const CreateItem = () => {
 
@@ -10,6 +15,19 @@ const CreateItem = () => {
   const [fields,setFields]           = useState(false)
   const [alert,setAlert]             = useState("danger")
   const [msg,setMsg]                 = useState("Something Wrong Try Again")
+  const [img, setImg]                = useState(null)
+  const [loading,setLoading]         = useState(false)
+  const [price,setPrice]             = useState("")
+  const [description,setDescription] = useState("")
+  const [category,setCategory]       = useState("")
+
+  const uploadimage = ()=>{
+
+  }
+
+  const delImage = ()=>{
+
+  }
 
   return (
     <div className='w-full min-h-screen flex justify-center items-center '>
@@ -53,6 +71,60 @@ const CreateItem = () => {
                       </select>
 
                 </div>
+                <div className='group flex justify-center items-center w-full h-225 md:h-420 border-2 border-dotted
+                                border-gray-300 rounded-lg cursor-pointer'>
+                         {
+                          loading ? (<>
+                            <Loader/>
+                          </>):(<>
+                             {
+                              !img ? (<>
+                                <label className='w-full h-full flex flex-col items-center justify-center'>
+                                      <div className='w-full h-full flex flex-col items-center justify-center'>
+                                              <BiSolidCloudUpload className='hover:text-orange-400 text-3xl cursor-pointer
+                                              transition-all ease-in-out duration-100'/>
+                                              <p className='text-2xl text-gray-500 text-center'>Click here to upload </p>
+
+                                        </div>
+                                        <input type="file" name='uploadimage' accept='image/*' className='w-0 h-0'
+                                          onChange={uploadimage}
+                                        />
+                                </label>
+                              </>):(<>
+                                   <div className='relative h-full ' >
+                                   <img src={img} alt="uploaded image" className='w-full h-full object-cover'/>
+                                   <button className='absolute bottom-3 right-3 p-3 
+                                          bg-red-500 text-xl rounded-full outline-none 
+                                           hover:shadow-md duration-500 transition-all 
+                                           ease-in-out  '
+                                        
+                                         type='button' onClick={delImage}><MdDelete className='text-white'/></button>
+                                   </div>
+                              </>)
+                             }
+                          </>)
+                         }
+                </div>
+                <div className='flex items-center border-b border-orange-300  py-2 w-full gap-2'>
+                                    <TbFileDescription className='text-lg text-orange-700'/>
+                                    <input type="text" placeholder='Enter Desription' required 
+                                    className='w-full h-full text-lg bg-transparent font-semibold
+                                    border-none outline-none placeholder:text-gray-400 text-textColor  ' 
+                                    onChange={(e)=>setDescription(e.target.value)}
+                                    value={description} />
+                           </div>
+                           <div className='flex items-center border-b border-orange-300  py-2 w-full gap-2'>
+                                    <FaRupeeSign className='text-lg text-orange-700'/>
+                                    <input type="number" placeholder='Enter Product Price' required 
+                                    className='w-full h-full text-lg bg-transparent font-semibold
+                                    border-none outline-none placeholder:text-gray-400 text-textColor  ' 
+                                    onChange={(e)=>setPrice(e.target.value)}
+                                    value={price} />
+                           </div>
+                           <div className='w-full flex  items-center '> 
+                               <button className='text-white bg-emerald-500 font-semibold rounded-lg ml-0 
+                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2'>Save Data</button>
+                           </div>
           </div>
     </div>
   )

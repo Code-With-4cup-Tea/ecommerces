@@ -7,6 +7,10 @@ import {BiSolidCloudUpload} from 'react-icons/bi'
 import {MdDelete} from 'react-icons/md'
 import {TbFileDescription} from 'react-icons/tb'
 import {FaRupeeSign} from 'react-icons/fa'
+import { storage } from '../firebase.config'
+import { deleteObject, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
+import { ref } from 'firebase/storage'
+import { saveItems } from '../utils/firebaseFunction'
 
 const CreateItem = () => {
   const [price,setPrice]             = useState("")
@@ -18,12 +22,124 @@ const CreateItem = () => {
   const [loading,setLoading]         = useState(false)
   const [category,setCategory]       = useState("")
   const [fields,setFields]           = useState(false)
+  const [imgdetail,setImgdetail]     = useState("first image")
 
-  const uploadimage = ()=>{
+  const uploadimage = (e)=>{
+    setLoading(true);// update loading with true
+    const imagedetails = e.target.files[0];
+    console.log(imagedetails)
+    setImgdetail(imagedetails.name)
+    const firebasestorageRef = ref(storage,`Images/${Date.now()}-${imagedetails.name}`); // we storing image in firebase image folder with 
+     // date
+    const uploadTask =uploadBytesResumable(firebasestorageRef,imagedetails); //help in uploading image
+
+    //below take three function snapshot error when every thing is correct
+    uploadTask.on("state_changed",(snapshot)=>{
+        const uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+
+    },
+    (error)=>{
+      console.log(error);
+      setFields(true);
+      setMsg("May be some error try again");
+      setAlert("danger");
+      setTimeout(()=>{
+            setFields(false);
+            setLoading(false)
+      },4000)
+    },
+    ()=>{
+      getDownloadURL(uploadTask.snapshot.ref).then(downloadURL=>{
+        setImage(downloadURL);
+        setLoading(false);
+        setFields(true);
+        setMsg("image uploading sucessfully ")
+        setAlert("success");
+        setTimeout(() => {
+          setFields(false)
+        }, 4000);
+
+      })
+    })
+
 
   }
 
-  const delImage = ()=>{
+  // const delImage = ()=>{
+  //   setLoading(true);
+  //   const delRef = ref(storage,setImage);
+  //   deleteObject(delRef).then(()=>{
+  //     setImage(null);
+  //     setLoading(false);
+  //     setFields(true);
+  //     setMsg("image deletd");
+  //     setAlert("success");
+  //     setTimeout(() => {
+  //       setFields(false)
+  //       console.log(error)
+  //     }, 4000);
+
+
+  //   })
+
+  // }
+
+  const savedata = ()=>{
+    setLoading(true);
+    try{
+      if((!price || !image || !description || !categories || !title)){
+       
+        setFields(true);
+        setMsg("must fill an empty box");
+        setAlert("danger");
+        setTimeout(()=>{
+              setFields(false);
+              setLoading(false)
+        },4000)
+      }else{
+          const data = {
+            id : `${Date.now()}`,
+            title : title,
+            imageURL: image,
+            category:category,
+            price:price,
+            description:description,
+            qty:1
+
+          }
+          saveItems(data);
+          setLoading(false);
+        setFields(true);
+        setMsg("data uploaded sucessfully ")
+        clearData()
+        setAlert("success");
+        
+        setTimeout(() => {
+          
+          setFields(false)
+        }, 4000);
+
+      }
+
+   
+    }catch(error){
+      console.log(error);
+      setFields(true);
+      setMsg("May be some error try again");
+      setAlert("danger");
+      setTimeout(()=>{
+            setFields(false);
+            setLoading(false)
+      },4000)
+    }
+  }
+
+  const clearData = ()=>{
+      setTitle("");
+      setImage(null);
+      setPrice("");
+      setCategory("Select Category");
+      setDescription("");
 
   }
 
@@ -93,12 +209,12 @@ const CreateItem = () => {
                                   (<>
                                     <div className='relative h-full '>
                                         <img src={image} alt="uploaded image" className='w-full h-full object-cover'/>
-                                        <button className='absolute bottom-3 right-3 p-3 
-                                          bg-red-500 text-xl rounded-full outline-none 
+                                        <button className='absolute bottom-0 right-0 p-2 
+                                          bg-red-500 bg-opacity-[60%]  text-xl  outline-none 
                                            hover:shadow-md duration-500 transition-all 
-                                           ease-in-out  '
+                                           ease-in-out  w-full text-white'
                                         
-                                         type='button' onClick={delImage}><MdDelete className='text-white'/></button>
+                                         type='button' >{imgdetail} uploaded</button>
 
                                     </div>
                                   </>)
@@ -122,7 +238,7 @@ const CreateItem = () => {
                            </div>
                            <div className='w-full flex  items-center '> 
                                <button className='text-white bg-emerald-500 font-semibold rounded-lg ml-0 
-                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2'>Save Data</button>
+                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2' onClick={savedata}>Save Data</button>
                            </div>
                     </div>
            
