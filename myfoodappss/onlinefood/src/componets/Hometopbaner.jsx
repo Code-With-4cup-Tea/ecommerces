@@ -53,7 +53,7 @@ const Hometopbaner = () => {
               </div>
 
               <div >
-                    <button className='mt-8 rounded-md bg-gradient-to-br from-orange-400 to-orange-500 w-full px-4 py-2 hover:shadow-lg transition-all ease-in-out duration-100 md:w-auto font-extrabold'>Order Now</button>
+                    <button className='mt-8 rounded-md bg-gradient-to-br from-orange-100 to-orange-500 w-full px-4 py-2 hover:shadow-lg transition-all ease-in-out duration-100 md:w-auto font-extrabold'>Order Now</button>
               </div>
               
         </div>

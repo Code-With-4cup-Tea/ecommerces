@@ -26,7 +26,7 @@ const CreateItem = () => {
 
   const uploadimage = (e)=>{
     setLoading(true);// update loading with true
-    const imagedetails = e.target.files[0];
+    const imagedetails = e.target.files;
     console.log(imagedetails)
     setImgdetail(imagedetails.name)
     const firebasestorageRef = ref(storage,`Images/${Date.now()}-${imagedetails.name}`); // we storing image in firebase image folder with 

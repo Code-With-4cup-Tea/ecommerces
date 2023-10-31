@@ -13,13 +13,14 @@ const fetcheddata = fetchLocalStorage();
 
 export const initialState ={
     user:fetcheddata,
+    foodItems:null,
 }
 
 const UserContextProvider = ({children})=>{
     const firebaseauth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    const [{user},dispatch] = useReducer(reducer,initialState);
+    const [{user,foodItems},dispatch] = useReducer(reducer,initialState);
 //    console.log(user);
 
     //   const  userdata={
@@ -65,7 +66,7 @@ const UserContextProvider = ({children})=>{
             user:null
           });
     }
-    return <UserContext.Provider value={{user,dispatch,login,active,logout,setActive}} > 
+    return <UserContext.Provider value={{user,foodItems,dispatch,login,active,logout,setActive}} > 
             {children}
     </UserContext.Provider>
 }

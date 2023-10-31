@@ -46,7 +46,7 @@ const Header = () => {
                                                     exit={{opacity:0, scale:0.6}}
                                                     className='bg-gray-50 rounded-xl flex flex-col gap-4 px-3 py-2 absolute shadow-xl  -right-10 top-9'>
                                                         {
-                                                          user && user.email ==="itshakti2017@gmail.com" && (
+                                                          user && user.email ==="codewith4cuptea@gmail.com" && (
                                                             <Link to={"/createitem"}>
                                                         <button className='flex justify-center items-center gap-1  hover:text-orange-500' onClick={()=>setActive(false)}>Add_Item <LiaUserEditSolid/></button>
                                                         </Link>

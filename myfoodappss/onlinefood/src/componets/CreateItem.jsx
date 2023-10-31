@@ -5,11 +5,22 @@ import {IoFastFoodSharp} from 'react-icons/io5'
 import { categories } from './data'
 import Loader from './Loader'
 import {BiSolidCloudUpload} from 'react-icons/bi'
-import {MdDelete} from 'react-icons/md'
+// import {MdDelete} from 'react-icons/md'
 import {TbFileDescription} from 'react-icons/tb'
 import {FaRupeeSign} from 'react-icons/fa'
+import { storage } from '../firebase.config'
+import { deleteObject, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
+import { ref } from 'firebase/storage'
+import { saveItems } from '../utils/firebaseFunction'
+import { UseUserContext } from '../context/Usercontex'
+import { getAllFoodItems } from '../utils/firebaseFunction'
+import { ACTION_TYPE } from '../reducer/Userrreducer'
+
+
+
 
 const CreateItem = () => {
+  const {user,foodItems,dispatch,login,active,logout,setActive} = UseUserContext();
 
   const [title,setTitle]             = useState("")
   const [fields,setFields]           = useState(false)
@@ -20,14 +31,121 @@ const CreateItem = () => {
   const [price,setPrice]             = useState("")
   const [description,setDescription] = useState("")
   const [category,setCategory]       = useState("")
+  const [imgdetail,setImgdetail]     = useState("first image")
 
-  const uploadimage = ()=>{
+  const uploadimage = (e)=>{
+        setLoading(true);
+        const imagedetails = e.target.files[0];//[0] because we dose not uploade multiple image we only upload single image
+        // console.log(imagedetails)
+        setImgdetail(imagedetails.name); // this is use for print after image uplad
+        const firebasestorageRef = ref(storage,`Images/${Date.now()}-${imagedetails.name}`);
+        //firebasestorageref use we are storeing image in firebase in images folder with date and image name for uniuqe
+        const uploadTask =uploadBytesResumable(firebasestorageRef,imagedetails); //help in uploading image
+
+        uploadTask.on('state_changed',(snapshot)=>{
+          const uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+          // image loading progress
+        },
+        (error)=>{
+          console.log(error);
+            setFields(true);
+            setMsg("May be some error try again");
+            setAlert("danger");
+      setTimeout(()=>{
+            setFields(false);
+            setLoading(false)
+      },4000)
+        },
+        ()=>{
+          getDownloadURL(uploadTask.snapshot.ref).then(downloadURL=>{
+            setImg(downloadURL);
+            setLoading(false);
+            setFields(true);
+            setMsg("image uploading sucessfully ")
+            setAlert("success");
+            setTimeout(() => {
+              setFields(false)
+            }, 4000);
+    
+          })
+        })
+
 
   }
+// for saving data to firebase
+const savedata = ()=>{
+  setLoading(true);
+  try{
+    if((!price || !img || !description || !categories || !title)){
+     
+      setFields(true);
+      setMsg("must fill an empty box");
+      setAlert("danger");
+      setTimeout(()=>{
+            setFields(false);
+            setLoading(false)
+      },4000)
+    }else{
+        const data = {
+          id : `${Date.now()}`,
+          title : title,
+          imageURL: img,
+          category:category,
+          price:price,
+          description:description,
+          qty:1
 
-  const delImage = ()=>{
+        }
+        saveItems(data);
+        setLoading(false);
+      setFields(true);
+      setMsg("data uploaded sucessfully ")
+      clearData()
+      setAlert("success");
+      
+      setTimeout(() => {
+        
+        setFields(false)
+      }, 4000);
+//when data success full uploaded than call bellow function
+    
+    }
 
+ 
+  }catch(error){
+    console.log(error);
+    setFields(true);
+    setMsg("May be some error try again");
+    setAlert("danger");
+    setTimeout(()=>{
+          setFields(false);
+          setLoading(false)
+    },4000)
   }
+  fetchData()
+}
+
+const clearData = ()=>{
+  setTitle("");
+  setImg(null);
+  setPrice("");
+  setCategory("Select Category");
+  setDescription("");
+
+}
+
+// below code run when data uplade succefull than all data fetch to fooditems initial state after that
+
+const fetchData = async()=>{
+    await getAllFoodItems().then((data)=>{
+      // console.log(data)
+      dispatch({
+        type:ACTION_TYPE.SET_FOOD_ITEMS,
+        foodItems:data,
+      })
+    })
+  }
+  
 
   return (
     <div className='w-full min-h-screen flex justify-center items-center '>
@@ -93,12 +211,12 @@ const CreateItem = () => {
                               </>):(<>
                                    <div className='relative h-full ' >
                                    <img src={img} alt="uploaded image" className='w-full h-full object-cover'/>
-                                   <button className='absolute bottom-3 right-3 p-3 
-                                          bg-red-500 text-xl rounded-full outline-none 
+                                   <button className='absolute bottom-0 right-0 p-2 
+                                          bg-red-500 bg-opacity-[30%]  text-xl  outline-none 
                                            hover:shadow-md duration-500 transition-all 
-                                           ease-in-out  '
+                                           ease-in-out  w-full text-white rounded-md'
                                         
-                                         type='button' onClick={delImage}><MdDelete className='text-white'/></button>
+                                         type='button' >{imgdetail} uploaded</button>
                                    </div>
                               </>)
                              }
@@ -123,7 +241,7 @@ const CreateItem = () => {
                            </div>
                            <div className='w-full flex  items-center '> 
                                <button className='text-white bg-emerald-500 font-semibold rounded-lg ml-0 
-                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2'>Save Data</button>
+                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2' onClick={savedata}>Save Data</button>
                            </div>
           </div>
     </div>

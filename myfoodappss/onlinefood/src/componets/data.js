@@ -1,8 +1,8 @@
 export const  categories =[
     {
         id:1,
-        name:"Pizza",
-        urlParamName:"pizza"
+        name:"Breakfast",
+        urlParamName:"breakfast"
     },
     {
         id:2,
@@ -11,18 +11,23 @@ export const  categories =[
     },
     {
         id:3,
-        name:"Rice",
-        urlParamName:"rice"
+        name:"Noodles",
+        urlParamName:"noodles"
     },
     {
         id:4,
-        name:"Icecream",
-        urlParamName:"icecream"
+        name:"Sandwiches",
+        urlParamName:"sandwiches"
     },
     {
         id:5,
-        name:"Fish",
-        urlParamName:"fish"
+        name:"Thali",
+        urlParamName:"thali"
+    },
+    {
+        id:6,
+        name:"Wraps",
+        urlParamName:"wraps"
     }
 
 ]
