@@ -6,7 +6,6 @@ import { ACTION_TYPE } from "../reducer/Userrreducer";
 import { fetchLocalStorage } from "../utils/fetchLocalStorage";
 
 
-
 const UserContext = createContext(null);
 
 const fetcheddata = fetchLocalStorage();
@@ -19,7 +18,7 @@ export const initialState ={
 const UserContextProvider = ({children})=>{
     const firebaseauth = getAuth(app);
     const provider = new GoogleAuthProvider();
-
+    // const [state, dispatch] = useReducer(reducer, { age: 42 });
     const [{user,foodItems},dispatch] = useReducer(reducer,initialState);
 //    console.log(user);
 
