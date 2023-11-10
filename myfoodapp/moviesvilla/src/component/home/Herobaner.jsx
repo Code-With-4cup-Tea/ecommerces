@@ -1,54 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch'
+
 import bannerimg from '../../images/OIP.jpg'
-import { useDispatch,useSelector } from 'react-redux'
-import { getApiConfiguration } from '../../store/home'
 
 const Herobaner = () => {
-    // for api loading
-
-    const [letdata,setLetdata] = useState(null)
-    const {data,loading} =useFetch("/movie/upcoming");
-    console.log("herobanner",data?.results?.poster_path
-    )
-
-    useEffect(()=>{
-      setLetdata(data?.results)
- },[setLetdata])
-
-letdata?.map((item)=>(
-         console.log("items",item),
-         console.log(item.poster_path)
-))
-
-
-
-
-console.log("letdata",letdata)
-    const dispatch = useDispatch()
-
-    useEffect(()=>{
-      dispatch(getApiConfiguration(data))
-
-    },[data])
-
-    const {url:trendings,catag} = useSelector((state)=>state.home)
-
-    // console.log("trending",url.poster+poster_path)
-    console.log("url is",trendings)
-    // console.log("url",trendings)
-    
-   
-   
-
-    const [search,setSearch]       = useState("")
-
+    const [backgound,setBackground] = useState("")
+    const [search,setSearch] = useState("");
     const navigate = useNavigate()
 
-    // for random banner image change
-    // floor using for natural number not for point numbers
     
+
+
+
+    
+// for check input search box must be start searching enter key or key lengh 0 se badi ho
     const inputHandler = (e)=>{
            if(e.key ==="Enter" && search.length>0){
                 navigate(`/search/${search}`)

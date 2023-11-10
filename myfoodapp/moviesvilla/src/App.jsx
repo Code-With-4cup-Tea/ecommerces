@@ -1,28 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import store from './store/store'
-import {Provider} from 'react-redux'
+import {Provider, useDispatch} from 'react-redux'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from "framer-motion"
 import Header from './component/Header'
 import Home from './component/home/Home'
-import { fetchDataApi } from './utils/api'
+
 import Footer from './component/Footer'
+import About from './component/About'
+
 
 
 
 
 const App = () => {
 
-  useEffect(()=>{
-      apiTest() 
-  },[])
-
-  const apiTest = ()=>{
-      fetchDataApi('/movie/popular')
-      .then((res)=>{
-        console.log(res)
-      })
-  }
+  
   
   return (
     <><Provider store={store}>
@@ -34,6 +27,7 @@ const App = () => {
         {/* <main className='mt-24 p-8 w-full'> */}
            <Routes>
                     <Route path='/*' element={<Home/>}/>
+                    <Route path='/about' element={<About/>}/>
                    
             </Routes>
        {/* </main> */}

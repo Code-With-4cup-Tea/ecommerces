@@ -65,8 +65,8 @@ const Header = () => {
                 ease-in-out cursor-pointer' >Home</li>
                 <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
                 ease-in-out cursor-pointer' >Menu</li>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
-                ease-in-out cursor-pointer' >About</li>
+                <Link to='/About'><li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
+                ease-in-out cursor-pointer' >About</li></Link>
                 <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
                 ease-in-out cursor-pointer' >Service</li>
             </ul>
