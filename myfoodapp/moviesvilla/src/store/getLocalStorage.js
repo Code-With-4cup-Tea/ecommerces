@@ -4,8 +4,5 @@ export const getLocalStorage = ()=>{
 
     JSON.parse(localStorage.getItem("movie")) : localStorage.clear();
 
-    return storeLocalStorage;
-             
-
-     
+    return storeLocalStorage;   
 }

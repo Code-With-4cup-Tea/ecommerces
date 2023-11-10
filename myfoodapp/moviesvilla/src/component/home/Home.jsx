@@ -1,6 +1,7 @@
 import React from 'react'
-
+import Herobaner from './Herobaner'
 import { useSelector } from 'react-redux'
+import Trandingslider from './tranding/trandingslider'
 // import fetchUsersDetails from '../store/userSlice'
 
 const Home = () => {
@@ -11,7 +12,11 @@ const Home = () => {
 
 
   return (
-    <div className='text-textColor '>Home</div>
+    <div>
+
+    <Herobaner/>
+    <Trandingslider/>
+    </div>
   )
 }
 

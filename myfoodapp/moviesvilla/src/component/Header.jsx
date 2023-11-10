@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../images/movies.png'
 import {AiTwotoneHeart} from 'react-icons/ai'
-
 import {AiOutlineLogout} from 'react-icons/ai'
 import { Link, json } from 'react-router-dom'
 import Userimage from './Userimage'
@@ -92,7 +91,7 @@ const Header = () => {
            -right-10 top-9'>
                                                         
                                                         
-        <Link to={"/"}>
+        <Link to={"/home"}>
            <button className='flex justify-center items-center gap-1  hover:text-orange-500' >
            {userinfo.displayName}
             
@@ -114,7 +113,7 @@ const Header = () => {
 
 
     <div className='flex items-center justify-between md:hidden w-full h-full'>
-        <Link to='/' className='flex justify-center items-center gap-2'>
+        <Link to='/home' className='flex justify-center items-center gap-2'>
             <img src={logo} alt="logo" className='w-12 object-cover'/>
             <p className= 'text-orange-500 font-bold'>Movies<span className='text-yellow-500'>villa
             </span></p>

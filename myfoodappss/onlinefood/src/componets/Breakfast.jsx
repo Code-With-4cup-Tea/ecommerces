@@ -15,9 +15,6 @@ const Breakfast = () => {
     // burgers contain only burgers value
     const breakfood = foodItems?.filter((c)=>c.category ==="breakfast")
     // console.log(wrapss)
-
-
-
 // useEffect(()=>{
   
 // },[burgerscrollvalue])
@@ -57,7 +54,7 @@ const rowBurger = useRef();
         }
 
         <div ref={rowBurger}
-        className='w-full my-12 overflow-x-scroll scrollbar-none  
+        className='w-full my-12 overflow-x-scroll scrollbar-none 
                     scroll-smooth flex items-center gap-2'>
             
             {

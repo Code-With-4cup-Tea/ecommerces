@@ -48,7 +48,7 @@ export default {
       "2xl":"1536px",
     },
     colors:{
-      bodyColor:"#131921",
+      bodyColor:"#04152D",
       headingColor:"#232F3E",
       textColor:"#E6E6E6",
       cartNumBg:"#e80013",
@@ -56,5 +56,7 @@ export default {
      },
    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 };
