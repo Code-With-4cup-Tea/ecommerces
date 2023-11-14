@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion"
 import { UseUserContext } from './context/Usercontex'
 import { getAllFoodItems } from './utils/firebaseFunction'
 import { ACTION_TYPE } from './reducer/Userrreducer'
+import Allfood from './componets/Allfood'
 
 console.log("this is app.jsx")
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
               <Routes>
                   <Route path='/*' element={<Home/>}/>
                   <Route path='/createitem' element={<CreateItem/>}/>
+                  <Route path='/allfood' element={<Allfood/>}/>
               </Routes>
             </main>
         </div>

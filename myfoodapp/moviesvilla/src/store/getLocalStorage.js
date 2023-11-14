@@ -6,3 +6,11 @@ export const getLocalStorage = ()=>{
 
     return storeLocalStorage;   
 }
+
+export const getWishLocalStorage = ()=>{
+    const storeWishLocalStorage = localStorage.getItem("wishStorage") !== "undefined" ?
+
+    JSON.parse(localStorage.getItem("wishStorage")) : localStorage.clear();
+
+    return storeWishLocalStorage ? storeWishLocalStorage:[];
+}

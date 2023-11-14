@@ -1,13 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { getWishLocalStorage } from './getLocalStorage'
 
-
+const wishStorgeList = getWishLocalStorage()
 
 
 
 
 const initialState = {
-    imgurl:[],
-    items:[]
+   
+    items:wishStorgeList
 }
      
 
@@ -17,11 +18,9 @@ export const wishlistslice = createSlice({
        initialState,
        reducers:{
           getWhishListConfiguration(state,action){
-                state.imgurl.push(action.payload)
-          },
-          whishList(state,action){
             state.items.push(action.payload)
-          }
+          },
+          
        }
 })
 

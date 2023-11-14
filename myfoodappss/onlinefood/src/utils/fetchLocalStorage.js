@@ -5,3 +5,13 @@ export const fetchLocalStorage= ()=>{
 
      return fetchdata;
 };
+
+
+
+
+export const fetchLocalCart= ()=>{
+     const cartinfo = localStorage.getItem("cartitem") !=="undefined"
+     ? JSON.parse(localStorage.getItem("cartitem")) : localStorage.clear();
+
+     return cartinfo ? cartinfo :[];
+};

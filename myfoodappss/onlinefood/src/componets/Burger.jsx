@@ -2,14 +2,35 @@ import React, { useEffect, useState,useRef} from 'react'
 import {MdOutlineNavigateBefore,MdNavigateNext }from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 import { UseUserContext } from '../context/Usercontex'
-
+import { ACTION_TYPE } from '../reducer/Userrreducer'
 import { motion } from 'framer-motion'
+
 
 const Burger = () => {
     const [burgerscrollvalue,setBurgerScrollvalue] = useState(0)
+    // const [cart,setCart] = useState([])
+    const {user,foodItems,dispatch,cartItems} = UseUserContext();
+    //this is use for local storage 
+    const [cartlist,setCartlist]  = useState()
+    
+      const addToCart = (burgerDetail)=>{
+        dispatch({
+          type:ACTION_TYPE.SET_CART_ITEMS,
+          cartItems:[...cartItems,burgerDetail]
+        });
+        setCartlist(cartItems)
+    }
+
+    // for local storage 
+    //when setCartlist update than local storage update 
+    useEffect(()=>{
+        localStorage.setItem("cartitem",JSON.stringify(cartItems))
+    },[cartlist])
+    
+   
 
     //for dispatch value form food items
-    const {user,foodItems,dispatch,login,active,logout,setActive} = UseUserContext();
+    
     // console.log("fooditems is ",foodItems[0].category)
     //acess particular data using filter
     // burgers contain only burgers value
@@ -20,6 +41,8 @@ const Burger = () => {
 
 
 // useEffect(()=>{
+//    addToCart();
+// },[cart])
   
 // },[burgerscrollvalue])
 const rowBurger = useRef();
@@ -85,6 +108,7 @@ const rowBurger = useRef();
                     <p className='text-lg font-semibold my-3 flex items-center'>
                     <FaRupeeSign/>{burgerDetail.price}</p>
                     <motion.button 
+                    onClick={()=>addToCart(burgerDetail)}
                      whileTap={{scale:0.75}}
                     className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'>ADD</motion.button>
                     </div>

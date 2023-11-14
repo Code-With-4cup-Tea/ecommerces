@@ -10,9 +10,12 @@ import { motion } from "framer-motion"
 
 const Header = () => {
 
-    const {user,active,logout,setActive} = UseUserContext();
+    const {user,active,logout,setActive,showCart,cartItems} = UseUserContext();
     console.log("active",active)
     console.log(logout)
+
+    //for cart show
+   
 
   return (
    <> 
@@ -26,13 +29,19 @@ const Header = () => {
         <div className='flex items-center gap-8 '>
             <ul className='flex items-center gap-8'>
                 <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >Home</li>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >Menu</li>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >About</li>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >Service</li>
+               <Link to='/Allfood'><li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >All Food</li></Link> 
+                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all ease-in-out cursor-pointer' >About_Me</li>
+                
             </ul>
                                 <div className='flex items-center relative'>
-                                     <BiCart className=' text-2xl'/>
-                                     <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center absolute -top-2 -right-0.5'>2</p>
+                                     <BiCart className=' text-2xl cursor-pointer'
+                                        onClick={showCart}
+                                     />
+                                     { //if cart items value greater than 0 than show counting of carts
+                                        cartItems && cartItems.length > 0 &&(
+                                            <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center absolute -top-2 -right-0.5'>{cartItems.length}</p>
+                                        )
+                                     }
                                 </div>
 
                                 <div className='relative'>
@@ -67,8 +76,14 @@ const Header = () => {
 
                             <div className='flex gap-6'>
                             <div className='flex items-center relative'>
-                                     <BiCart className=' text-2xl'/>
-                                     <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center absolute -top-2 -right-0.5'>2</p>
+                                     <BiCart className=' text-2xl cursor-pointer'
+                                        onClick={showCart}
+                                     />
+                                     { //if cart items value greater than 0 than show counting of carts
+                                        cartItems && cartItems.length > 0 &&(
+                                            <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center absolute -top-2 -right-0.5'>{cartItems.length}</p>
+                                        )
+                                     }
                                 </div>
                                 <div className='relative'>
                             

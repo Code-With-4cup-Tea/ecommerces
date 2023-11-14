@@ -1,12 +1,15 @@
 import React from 'react'
 import Herobaner from './Herobaner'
 import { useEffect } from 'react'
-import Trandingslider from './tranding/trandingslider'
+// import Trandingslider from './tranding/trandingslider'
+import Trandingslider from './tranding/Trandingslider'
 // import fetchUsersDetails from '../store/userSlice'
 import { useDispatch,useSelector } from 'react-redux'
 import { getApiConfiguration } from '../../store/home'
 import { fetchDataApi } from '../../utils/api'
 import useFetch from '../../hooks/useFetch'
+import { whishList } from '../../store/wishlistslice'
+import Wishlistpage from '../wishlist/Wishlistpage'
 
 const Home = () => {
      // for fetchig data form api or storing in url state in redux tool kit
@@ -48,6 +51,7 @@ const Home = () => {
     <div>
 
     <Herobaner/>
+    <Wishlistpage/>
     <div className='mt-1 p-8 w-full'>
          <Trandingslider/>
     </div>

@@ -63,12 +63,9 @@ const Header = () => {
             <ul className='flex items-center gap-8'>
                 <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
                 ease-in-out cursor-pointer' >Home</li>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
-                ease-in-out cursor-pointer' >Menu</li>
                 <Link to='/About'><li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
-                ease-in-out cursor-pointer' >About</li></Link>
-                <li className='text-base text-textColor hover:text-orange-500 duration-100 transition-all 
-                ease-in-out cursor-pointer' >Service</li>
+                ease-in-out cursor-pointer' >About_Me</li></Link>
+                
             </ul>
                                 
         <div className='flex items-center relative'>

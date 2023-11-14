@@ -3,23 +3,27 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase.config'
 import reducer from "../reducer/Userrreducer";
 import { ACTION_TYPE } from "../reducer/Userrreducer";
-import { fetchLocalStorage } from "../utils/fetchLocalStorage";
+import { fetchLocalStorage,fetchLocalCart} from "../utils/fetchLocalStorage";
+
 
 
 const UserContext = createContext(null);
 
 const fetcheddata = fetchLocalStorage();
+const fetchCartInfo = fetchLocalCart();
 
 export const initialState ={
     user:fetcheddata,
     foodItems:null,
+    cartShow:false,
+    cartItems:fetchCartInfo
 }
 
 const UserContextProvider = ({children})=>{
     const firebaseauth = getAuth(app);
     const provider = new GoogleAuthProvider();
     // const [state, dispatch] = useReducer(reducer, { age: 42 });
-    const [{user,foodItems},dispatch] = useReducer(reducer,initialState);
+    const [{user,foodItems,cartShow,cartItems},dispatch] = useReducer(reducer,initialState);
 //    console.log(user);
 
     //   const  userdata={
@@ -65,7 +69,16 @@ const UserContextProvider = ({children})=>{
             user:null
           });
     }
-    return <UserContext.Provider value={{user,foodItems,dispatch,login,active,logout,setActive}} > 
+
+    const showCart  = () =>{
+        
+        dispatch({
+          type:ACTION_TYPE.SET_CART_SHOW,
+          cartShow:!cartShow
+        });
+  }
+
+    return <UserContext.Provider value={{user,foodItems,dispatch,login,active,logout,setActive,cartShow,showCart,cartItems}} > 
             {children}
     </UserContext.Provider>
 }

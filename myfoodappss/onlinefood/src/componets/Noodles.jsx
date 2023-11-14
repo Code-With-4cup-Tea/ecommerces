@@ -2,25 +2,32 @@ import React, { useEffect, useState,useRef} from 'react'
 import {MdOutlineNavigateBefore,MdNavigateNext }from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 import { UseUserContext } from '../context/Usercontex'
-
+import { ACTION_TYPE } from '../reducer/Userrreducer'
 import { motion } from 'framer-motion'
 
 const Noodles = () => {
     const [burgerscrollvalue,setBurgerScrollvalue] = useState(0)
-
-    //for dispatch value form food items
-    const {user,foodItems,dispatch,login,active,logout,setActive} = UseUserContext();
-    // console.log("fooditems is ",foodItems[0].category)
-    //acess particular data using filter
-    // burgers contain only burgers value
+    const {user,foodItems,dispatch,cartItems} = UseUserContext();
+    const [noodlelist,setNoodleList]  = useState()
+    
     const noodlesfood = foodItems?.filter((c)=>c.category ==="noodles")
-    // console.log(wrapss)
+   
+    //for update cart value
+    const addToCart = (noodlesfoodDetail)=>{
+        dispatch({
+          type:ACTION_TYPE.SET_CART_ITEMS,
+          cartItems:[...cartItems,noodlesfoodDetail]
+        });
+        setNoodleList(cartItems)
+    }
+// for local storage update
+ //when setCartlist update than local storage update 
+ useEffect(()=>{
+    localStorage.setItem("cartitem",JSON.stringify(cartItems))
+},[noodlelist])
 
 
-
-// useEffect(()=>{
-  
-// },[burgerscrollvalue])
+    //for scroll 
 const rowBurger = useRef();
     // console.log("rwo",rowCategory)
     useEffect(()=>{
@@ -85,7 +92,9 @@ const rowBurger = useRef();
                     <FaRupeeSign/>{noodlesfoodDetail.price}</p>
                     <motion.button 
                      whileTap={{scale:0.75}}
-                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'>ADD</motion.button>
+                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'
+                    onClick={()=>addToCart(noodlesfoodDetail)}
+                    >ADD</motion.button>
                     </div>
             </div>
                 

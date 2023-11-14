@@ -2,25 +2,33 @@ import React, { useEffect, useState,useRef} from 'react'
 import {MdOutlineNavigateBefore,MdNavigateNext }from 'react-icons/md'
 import {FaRupeeSign} from 'react-icons/fa'
 import { UseUserContext } from '../context/Usercontex'
-
+import { ACTION_TYPE } from '../reducer/Userrreducer'
 import { motion } from 'framer-motion'
 
 const Sandwiches = () => {
     const [burgerscrollvalue,setBurgerScrollvalue] = useState(0)
+    const {user,foodItems,dispatch,cartItems} = UseUserContext();
+    const [sandwichlist,setSandwichList]  = useState()
 
-    //for dispatch value form food items
-    const {user,foodItems,dispatch,login,active,logout,setActive} = UseUserContext();
-    // console.log("fooditems is ",foodItems[0].category)
-    //acess particular data using filter
-    // burgers contain only burgers value
-    const sandwich = foodItems?.filter((c)=>c.category ==="sandwiches")
-    // console.log(wrapss)
+    
+const sandwich = foodItems?.filter((c)=>c.category ==="sandwiches")
+   
+//for update cart value
+const addToCart = (sandwichfoodDetail)=>{
+    dispatch({
+      type:ACTION_TYPE.SET_CART_ITEMS,
+      cartItems:[...cartItems,sandwichfoodDetail]
+    });
+    setSandwichList(cartItems)
+}
+// for local storage update
+//when setCartlist update than local storage update 
+useEffect(()=>{
+localStorage.setItem("cartitem",JSON.stringify(cartItems))
+},[sandwichlist])
 
 
 
-// useEffect(()=>{
-  
-// },[burgerscrollvalue])
 const rowBurger = useRef();
     // console.log("rwo",rowCategory)
     useEffect(()=>{
@@ -85,7 +93,9 @@ const rowBurger = useRef();
                     <FaRupeeSign/>{sandwichfoodDetail.price}</p>
                     <motion.button 
                      whileTap={{scale:0.75}}
-                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'>ADD</motion.button>
+                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'
+                    onClick={()=>addToCart(sandwichfoodDetail)}
+                    >ADD</motion.button>
                     </div>
             </div>
                 

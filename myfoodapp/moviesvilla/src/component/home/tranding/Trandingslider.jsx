@@ -12,26 +12,41 @@ import { getWhishListConfiguration } from '../../../store/wishlistslice'
 import { whishList } from '../../../store/wishlistslice'
 
 
+
 const Trandingslider = () => {
   //for fetching api data
   const [trending,setTrending] = useState(null)
- 
+  const [heratColor,setHeartColor] = useState(null)
+  const [state,setState] = useState(null)
+  const [noodlelist,setNoodleList]  = useState()
+ console.log("trending",trending)
  const dispatch = useDispatch()
 
-  const {data,loading} = useFetch(`/trending/all/day`)
+  const {data,loading} = useFetch(state)
   
   useEffect(()=>{
        setTrending(data?.results)
       
   },[data])
 
-  
-    const whislistCall = (posterUrl,items)=>{
-      dispatch(getWhishListConfiguration(posterUrl))
-      dispatch(whishList(items))
+  useEffect(()=>{
+      setState(`/trending/all/day`)
+  },[])
+
+  const {items} = useSelector((state)=> state.wishlist)
+
+
+    const whislistCall = (items)=>{
+      dispatch(getWhishListConfiguration(items))
+     alert("❤️Added to WishLish❤️")
+     setNoodleList(items)
+    //  localStorage.setItem("wishStorage",JSON.stringify(items))
+      
  }
  
-
+ useEffect(()=>{
+  localStorage.setItem("wishStorage",JSON.stringify(items))
+},[noodlelist])
   // console.log("trending",data) 
   
   // console.log("trendingstate",trending)
@@ -40,7 +55,7 @@ const Trandingslider = () => {
   const {url} =useSelector((state)=>state.home)
 
 
-  const [trandingscrollvalue,setTrandingScrollvalue] = useState(0)
+  // const [trandingscrollvalue,setTrandingScrollvalue] = useState(0)
 
   // const traindings = useRef();
   //   // console.log("rwo",rowCategory)
@@ -49,14 +64,60 @@ const Trandingslider = () => {
   //   },[trandingscrollvalue])
   return (
        <div>
-          <div className='w-full flex justify-start'>
+          <div className='w-full flex justify-center gap-8 flex-wrap'>
 
-           <p className='text-2xl font-semibold capitalize relative text-white before:absolute 
-           before:rounded-lg before:w-16 before:h-1 before:-bottom-2 before:left-0  
-           before:bg-gradient-to-tr from-yellow-200 to-yellow-600 before:content cursor-pointer'
-            >Trending</p>
+          <motion.div 
+          whileTap={{scale:0.75}}
+          className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
+            font-semibold flex justify-center items-center
+           ${
+            state ===`/trending/all/day` ? "bg-red-500" : "bg-yellow-400"
+           }
+          `}
+          onClick={()=>setState(`/trending/all/day`)}
+          >
+          <button>Trending</button>
+          </motion.div>
 
-         
+           <motion.div 
+          whileTap={{scale:0.75}}
+          className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
+            font-semibold flex justify-center items-center
+           ${
+            state ===`/movie/popular` ? "bg-red-500" : "bg-yellow-400"
+           }
+          `}
+          onClick={()=>setState(`/movie/popular`)}
+          >
+          <button>Popular</button>
+          </motion.div>
+
+          <motion.div 
+          whileTap={{scale:0.75}}
+          className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
+            font-semibold flex justify-center items-center
+           ${
+            state ===`/movie/top_rated` ? "bg-red-500" : "bg-yellow-400"
+           }
+          `}
+          onClick={()=>setState(`/movie/top_rated`)}
+          >
+          <button>Top_Rated</button>
+          </motion.div>
+
+          <motion.div 
+          whileTap={{scale:0.75}}
+          className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
+            font-semibold flex justify-center items-center
+           ${
+            state ===`/movie/upcoming` ? "bg-red-500" : "bg-yellow-400"
+           }
+          `}
+          onClick={()=>setState(`/movie/upcoming`)}
+          >
+          <button>Upcoming</button>
+          </motion.div>
+
             </div>
 
 
@@ -86,9 +147,10 @@ const Trandingslider = () => {
                 <motion.div 
                  whileTap={{scale:0.75}}
                 className='absolute top-3 right-0 cursor-pointer '
-                onClick={()=>whislistCall(posterUrl,items)}
+                onClick={()=>whislistCall(items)}
+               
                  >
-                <AiTwotoneHeart className='text-red-500 text-4xl hover:text-yellow-400'/>
+                <AiTwotoneHeart className={'text-red-500 text-4xl hover:text-yellow-400'}/>
                 </motion.div>
                 
             </div>
