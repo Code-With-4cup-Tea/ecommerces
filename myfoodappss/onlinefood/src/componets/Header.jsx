@@ -8,6 +8,7 @@ import {AiOutlineLogout} from 'react-icons/ai'
 import { UseUserContext } from '../context/Usercontex'
 import { motion } from "framer-motion"
 
+
 const Header = () => {
 
     const {user,active,logout,setActive,showCart,cartItems} = UseUserContext();

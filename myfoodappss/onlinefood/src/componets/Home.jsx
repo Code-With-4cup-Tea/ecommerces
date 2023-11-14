@@ -7,11 +7,11 @@ import Breakfast from './Breakfast'
 import Thali from './Thali'
 import Noodles from './Noodles'
 import Sandwiches from './Sandwiches'
-import Cartpage from './Cartpage'
-import { UseUserContext } from '../context/Usercontex'
+// import Cartpage from './Cartpage'
+// import { UseUserContext } from '../context/Usercontex'
 
 const Home = () => {
-  const {cartShow} = UseUserContext();
+  // const {cartShow} = UseUserContext();
   return (
     <div >
 
@@ -23,11 +23,11 @@ const Home = () => {
     <Thali/>
     <Wraps/>
     <Noodles/>
-    {
+    {/* {
       cartShow && (
         <Cartpage/>
       )
-    }
+    } */}
     
     
     </div>

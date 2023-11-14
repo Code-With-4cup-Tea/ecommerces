@@ -4,20 +4,22 @@ import {FaRupeeSign} from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { UseUserContext } from '../context/Usercontex'
 import { ACTION_TYPE } from '../reducer/Userrreducer'
+let filterdItems = [];
 
 const Cartitems = ({cartproduct,flag,setFlag}) => {
     //for qty
     const {cartItems,dispatch} = UseUserContext();
     //item.qty this comes form updateqty function
     const [qty,setQty] = useState(cartproduct.qty)
-    const [update,setUpdate] = useState([])
+    // const [update,setUpdate] = useState([])
 
     //for update cartiems with action 
      //for update cart value
      const updateCartItems = ()=>{
+        localStorage.setItem("cartitem",JSON.stringify(filterdItems))
         dispatch({
           type:ACTION_TYPE.SET_CART_ITEMS,
-          cartItems:update
+          cartItems:filterdItems
         });
        
     }
@@ -38,9 +40,7 @@ const Cartitems = ({cartproduct,flag,setFlag}) => {
     updateCartItems()
          }else{
             if(qty == 1){
-                setUpdate(cartItems.filter((items)=>
-                          items.id !== id
-                ))
+                filterdItems =cartItems.filter((item) => item.id !== id);
                 setFlag(flag+1)
                 updateCartItems()
             }else{
@@ -60,13 +60,13 @@ const Cartitems = ({cartproduct,flag,setFlag}) => {
            
     }
 
-// useEffect(()=>{
-//       setUpdate(cartItems)
-// },[qty])
+useEffect(()=>{
+      filterdItems = cartItems;
+},[qty,filterdItems])
     //for local storage
-    useEffect(()=>{
-        localStorage.setItem("cartitem",JSON.stringify(update))
-    },[qty])
+    // useEffect(()=>{
+    //     localStorage.setItem("cartitem",JSON.stringify(update))
+    // },[qty])
   
   return (
     <div className='w-full p-1 px-2 rounded-lg bg-slate-800 flex justify-start 

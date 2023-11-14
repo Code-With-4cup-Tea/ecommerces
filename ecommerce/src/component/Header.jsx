@@ -33,7 +33,7 @@ const Header = ({toggle}) => {
                 </span>
                 </NavLink> 
             </Nave>
-
+ 
             <Mobilemenubar>
                     <GiHamburgerMenu className='bar' onClick={toggle}/>
             </Mobilemenubar>

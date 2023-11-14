@@ -8,10 +8,11 @@ import { UseUserContext } from './context/Usercontex'
 import { getAllFoodItems } from './utils/firebaseFunction'
 import { ACTION_TYPE } from './reducer/Userrreducer'
 import Allfood from './componets/Allfood'
+import Cartpage from './componets/Cartpage'
 
 console.log("this is app.jsx")
 const App = () => {
-  const {user,foodItems,dispatch,login,active,logout,setActive} = UseUserContext();
+  const {user,foodItems,dispatch,login,active,logout,setActive,cartShow} = UseUserContext();
 
 // fetchData function use for getdata from getallfooditems functin useffect useing when website load
 // one time fetchdata function call ho jaye than ek data load ho jaye
@@ -36,6 +37,11 @@ const App = () => {
     <> <AnimatePresence>
         <div className='w-full h-auto bg-primary flex flex-col'>
               <Header/>
+              {
+      cartShow && (
+        <Cartpage/>
+      )
+    }
             <main className='mt-24 p-8 w-full'>
               <Routes>
                   <Route path='/*' element={<Home/>}/>
