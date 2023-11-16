@@ -8,7 +8,8 @@ const wishStorgeList = getWishLocalStorage()
 
 const initialState = {
    
-    items:wishStorgeList
+    items:wishStorgeList,
+    cut:false
 }
      
 
@@ -20,10 +21,18 @@ export const wishlistslice = createSlice({
           getWhishListConfiguration(state,action){
             state.items.push(action.payload)
           },
+            getFilteredWhishListConfiguration(state,action){
+              state.items=action.payload
+                
+            },
+            getCloseWhishList(state,action){
+                state.cut = action.payload
+            }
+          }
           
        }
-})
+)
 
-export const{getWhishListConfiguration,whishList} = wishlistslice.actions;
+export const{getWhishListConfiguration,whishList, getFilteredWhishListConfiguration, getCloseWhishList} = wishlistslice.actions;
 export default wishlistslice.reducer;
 

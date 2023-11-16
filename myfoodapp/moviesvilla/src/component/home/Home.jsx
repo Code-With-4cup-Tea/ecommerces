@@ -11,8 +11,11 @@ import useFetch from '../../hooks/useFetch'
 import { whishList } from '../../store/wishlistslice'
 import Wishlistpage from '../wishlist/Wishlistpage'
 
+
 const Home = () => {
+  const {items,cut} = useSelector((state)=> state.wishlist)
      // for fetchig data form api or storing in url state in redux tool kit
+
 
      // images ko display karany ke liye hamay tin url chaiye 1. baseurl 2.second size 3. file.path
      // inichay rul main baseurl store kiya or usmay image size bhi hai jiska image dikhana hai uska file path fetch kar na hoga
@@ -51,7 +54,10 @@ const Home = () => {
     <div>
 
     <Herobaner/>
-    <Wishlistpage/>
+    {
+      cut &&  <Wishlistpage/>
+    }
+   
     <div className='mt-1 p-8 w-full'>
          <Trandingslider/>
     </div>

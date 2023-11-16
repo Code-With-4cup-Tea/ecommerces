@@ -10,10 +10,11 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../fireBaseConfig'
 import { useDispatch } from 'react-redux'
 import { login,logout } from '../store/userSlice'
-
+import { getCloseWhishList } from '../store/wishlistslice'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
+    const {items,cut} = useSelector((state)=> state.wishlist)
     const firebaseauth = getAuth(app);
     const provider = new GoogleAuthProvider();
     
@@ -69,9 +70,15 @@ const Header = () => {
             </ul>
                                 
         <div className='flex items-center relative'>
-             <AiTwotoneHeart className=' text-2xl text-red-600 cursor-pointer '/>
-             <p className='text-sm  text-white font-semibold bg-red-500 rounded-full w-4 text-center 
-             absolute -top-2 -right-0.5'>2</p>
+             <AiTwotoneHeart 
+              onClick={()=>dispatch(getCloseWhishList(!cut))}
+             className=' text-2xl text-red-600 cursor-pointer '/>
+             {
+                items && (
+                    <p className='text-sm  text-white font-semibold bg-red-500 rounded-full w-4 text-center 
+             absolute -top-2 -right-0.5'>{items.length}</p>
+                )
+             }
         </div>
 
         <div className='relative'>
@@ -118,9 +125,15 @@ const Header = () => {
 
     <div className='flex gap-6'>
         <div className='flex items-center relative'>
-            <AiTwotoneHeart className=' text-2xl  text-red-600 cursor-pointer'/>
-            <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center
-             absolute -top-2 -right-0.5'>2</p>
+            <AiTwotoneHeart 
+             onClick={()=>dispatch(getCloseWhishList(!cut))}
+            className=' text-2xl  text-red-600 cursor-pointer'/>
+            {
+                items && (
+                    <p className='text-sm  text-white font-semibold bg-orange-500 rounded-full w-4 text-center
+             absolute -top-2 -right-0.5'>{items.length}</p>
+                )
+            }
         </div>
     <div className='relative'>
         <Userimage loginHandler = {loginHandler} />                                        
