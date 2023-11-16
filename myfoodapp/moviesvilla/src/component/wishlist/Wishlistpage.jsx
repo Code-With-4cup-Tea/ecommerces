@@ -8,7 +8,7 @@ let filteredItems = []
 
 
 const Wishlistpage = () => {
-   
+    const{users:userinfo} = useSelector((state)=>state.user)
     const {items,cut} = useSelector((state)=> state.wishlist)
     console.log("items",items)
     console.log("cut",cut)
@@ -96,33 +96,7 @@ const filterdfunction = (filteredItems)=>{
                 </div>
                             ))
                           }
-                {/* {
-                    items && items.map((wishitems)=>{
-                        const posterUrl = wishitems.poster_path ? 
-                        url.poster+wishitems.poster_path : imagenot;
-                        return (
-                            <div className='w-full p-1 px-2 rounded-lg bg-slate-800 flex justify-start 
-                        items-start gap-3' key={wishitems.id} >
-                   
-                        <img src={posterUrl}
-                        alt="" className='w-full h-36 max-w-[150px] rounded-semi object-contain'/>
-
-                    <div className='flex flex-col item  h-36'>
-                            <p className='text-base text-white font-semibold'>
-                            {(wishitems.title || wishitems.name)}
-                            </p>
-                        <motion.div 
-                             whileTap={{scale:0.75}}
-                             className='text-base font-semibold bg-red-500 text-white p-1
-                                  text-center  rounded-md '
-                                  onClick={()=>filterFunction(wishitems.id)}>
-                                     <button>Delete</button>
-                        </motion.div>
-                    </div>      
-                </div>
-                        )
-                    })
-                } */}
+                
             </div>
                   
                     

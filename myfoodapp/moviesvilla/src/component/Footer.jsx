@@ -7,10 +7,7 @@ function Footer() {
 
 
 
-        kkjdjf
-        ddfj
-        ldfj
-        jdf
+        Footer 
         
     </div>
   )

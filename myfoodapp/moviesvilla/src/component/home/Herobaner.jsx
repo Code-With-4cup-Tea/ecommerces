@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import bannerimg from '../../images/OIP.jpg'
 
 const Herobaner = () => {
-    const [backgound,setBackground] = useState("")
+    
     const [search,setSearch] = useState("");
     const navigate = useNavigate()
 

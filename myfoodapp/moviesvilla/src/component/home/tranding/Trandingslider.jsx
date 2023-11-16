@@ -15,8 +15,11 @@ import { whishList } from '../../../store/wishlistslice'
 
 const Trandingslider = () => {
   //for fetching api data
+  const [pageno,setPageno] = useState(1)
+  
+  console.log("page number is",pageno)
   const [trending,setTrending] = useState(null)
-  const [heratColor,setHeartColor] = useState(null)
+
   const [state,setState] = useState(null)
   const [noodlelist,setNoodleList]  = useState()
  console.log("trending",trending)
@@ -27,10 +30,26 @@ const Trandingslider = () => {
   useEffect(()=>{
        setTrending(data?.results)
       
-  },[data])
+  },[data,pageno])
+
+ 
+
+
+// const pageination = ()=>{
+//        if(`/movie/top_rated?&page=${pageno}`){
+//              setState(`/movie/top_rated?&page=${pageno}`)
+//        }else if(`/movie/popular?&page=${pageno}`){
+//              setState(`/movie/popular?&page=${pageno}`)
+//        }
+// }
+
+// useEffect(()=>{
+//      pageination()
+// })
+
 
   useEffect(()=>{
-      setState(`/trending/all/day`)
+      setState(`/trending/all/day?&page=${pageno}`)
   },[])
 
   const {items} = useSelector((state)=> state.wishlist)
@@ -71,10 +90,10 @@ const Trandingslider = () => {
           className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
             font-semibold flex justify-center items-center
            ${
-            state ===`/trending/all/day` ? "bg-red-500" : "bg-yellow-400"
+            state ===`/trending/all/day?&page=${pageno}` ? "bg-red-500" : "bg-yellow-400"
            }
           `}
-          onClick={()=>setState(`/trending/all/day`)}
+          onClick={()=>setState(`/trending/all/day?&page=${pageno}`)}
           >
           <button>Trending</button>
           </motion.div>
@@ -84,10 +103,12 @@ const Trandingslider = () => {
           className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
             font-semibold flex justify-center items-center
            ${
-            state ===`/movie/popular` ? "bg-red-500" : "bg-yellow-400"
+            state ===`/movie/popular?&page=${pageno}` ? "bg-red-500" : "bg-yellow-400"
            }
           `}
-          onClick={()=>setState(`/movie/popular`)}
+          onClick={()=>setState(`/movie/popular?&page=${pageno}`)
+          }
+        
           >
           <button>Popular</button>
           </motion.div>
@@ -97,10 +118,9 @@ const Trandingslider = () => {
           className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
             font-semibold flex justify-center items-center
            ${
-            state ===`/movie/top_rated` ? "bg-red-500" : "bg-yellow-400"
-           }
-          `}
-          onClick={()=>setState(`/movie/top_rated`)}
+            state ===`/movie/top_rated?&page=${pageno}` ? "bg-red-500" : "bg-yellow-400"}`}
+          onClick={()=>setState(`/movie/top_rated?&page=${pageno}`)}
+         
           >
           <button>Top_Rated</button>
           </motion.div>
@@ -110,10 +130,10 @@ const Trandingslider = () => {
           className={`w-20 rounded-full h-10 px-12 hover:bg-black hover:text-white
             font-semibold flex justify-center items-center
            ${
-            state ===`/movie/upcoming` ? "bg-red-500" : "bg-yellow-400"
+            state ===`/movie/upcoming?&page=${pageno}` ? "bg-red-500" : "bg-yellow-400"
            }
           `}
-          onClick={()=>setState(`/movie/upcoming`)}
+          onClick={()=>setState(`/movie/upcoming?&page=${pageno}`)}
           >
           <button>Upcoming</button>
           </motion.div>
@@ -141,7 +161,7 @@ const Trandingslider = () => {
                   </div>
                 <div className='w-full flex  flex-col'>
                     <p className=' text-white '>{(items.title || items.name).slice(0,20)}</p>
-                    <p className='text-gray-500  '>{dayjs(items.release_Date).format("MMM D,YYYY")}</p>
+                    <p className='text-gray-500  '>{dayjs(items.release_date).format("MMM D,YYYY")}</p>
                 </div>
 
                 <motion.div 
@@ -161,9 +181,22 @@ const Trandingslider = () => {
             
               </div>
 
+              
 
+              <div className='flex justify-center gap-5'>
+                  <div onClick={()=>setPageno(pageno-1)}>
+                       <button>5</button>
+                  </div>
+                  <div >
+                        <p>6</p>
+                  </div>
+                  <div onClick={()=>setPageno(pageno+1)}>
+                       <button>7</button>
+                  </div>
+              </div>
              
        </div>
+       
   )
 }
 

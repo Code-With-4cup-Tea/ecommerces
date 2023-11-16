@@ -8,6 +8,7 @@ import Home from './component/home/Home'
 
 import Footer from './component/Footer'
 import About from './component/About'
+import Searchresult from './component/serachresult/Searchresult'
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
            <Routes>
                     <Route path='/*' element={<Home/>}/>
                     <Route path='/about' element={<About/>}/>
+                    <Route path='search/:query' element={<Searchresult/>}/>
                    
             </Routes>
        {/* </main> */}
