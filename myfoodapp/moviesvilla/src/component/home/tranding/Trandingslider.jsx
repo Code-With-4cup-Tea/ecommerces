@@ -33,21 +33,6 @@ const Trandingslider = () => {
   },[data,pageno])
 
  
-
-
-// const pageination = ()=>{
-//        if(`/movie/top_rated?&page=${pageno}`){
-//              setState(`/movie/top_rated?&page=${pageno}`)
-//        }else if(`/movie/popular?&page=${pageno}`){
-//              setState(`/movie/popular?&page=${pageno}`)
-//        }
-// }
-
-// useEffect(()=>{
-//      pageination()
-// })
-
-
   useEffect(()=>{
       setState(`/trending/all/day?&page=${pageno}`)
   },[])
@@ -66,6 +51,9 @@ const Trandingslider = () => {
  useEffect(()=>{
   localStorage.setItem("wishStorage",JSON.stringify(items))
 },[noodlelist])
+
+// for checking items is already added in wishlist if yes than heart disabled
+    
   // console.log("trending",data) 
   
   // console.log("trendingstate",trending)
