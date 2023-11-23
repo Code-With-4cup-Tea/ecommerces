@@ -140,7 +140,7 @@ const fetchData = async()=>{
     await getAllFoodItems().then((data)=>{
       // console.log(data)
       dispatch({
-        type:ACTION_TYPE.SET_FOOD_ITEMS,
+        type:ACTION_TYPE.SET_FOOD_ITEMS, 
         foodItems:data,
       })
     })
@@ -149,14 +149,16 @@ const fetchData = async()=>{
 
   return (
     <div className='w-full min-h-screen flex justify-center items-center '>
-          <div className='w-[90%] md:w-[75%] border border-gray-300 rounded-lg p-4 flex justify-center items-center flex-col gap-4'>
+          <div className='w-[90%] md:w-[75%] border border-gray-300 rounded-lg p-4 flex 
+          justify-center items-center flex-col gap-4'>
               {
                 fields && (
                         <motion.p 
                          initial={{opacity:0}}
                          animate={{opacity:1}}
                          exit={{opacity:0}}
-                         className={`w-full text-center p-2 rounded-lg text-white font-bold ${alert ==="danger" ?
+                         className={`w-full text-center p-2 rounded-lg text-white font-bold 
+                         ${alert ==="danger" ?
                          "bg-red-500" : "bg-green-500"
 
                          }`}>
@@ -189,7 +191,8 @@ const fetchData = async()=>{
                       </select>
 
                 </div>
-                <div className='group flex justify-center items-center w-full h-225 md:h-420 border-2 border-dotted
+                <div className='group flex justify-center items-center w-full h-225 md:h-420 border-2 
+                              border-dotted
                                 border-gray-300 rounded-lg cursor-pointer'>
                          {
                           loading ? (<>
@@ -198,13 +201,17 @@ const fetchData = async()=>{
                              {
                               !img ? (<>
                                 <label className='w-full h-full flex flex-col items-center justify-center'>
-                                      <div className='w-full h-full flex flex-col items-center justify-center'>
-                                              <BiSolidCloudUpload className='hover:text-orange-400 text-3xl cursor-pointer
-                                              transition-all ease-in-out duration-100'/>
-                                              <p className='text-2xl text-gray-500 text-center'>Click here to upload </p>
+                                      <div className='w-full h-full flex flex-col items-center
+                                       justify-center'>
+                                              <BiSolidCloudUpload className='hover:text-orange-400 
+                                              text-3xl cursor-pointer transition-all ease-in-out duration-100'/>
+                                              
+                                              <p className='text-2xl text-gray-500 text-center'>
+                                              Click here to upload </p>
 
                                         </div>
-                                        <input type="file" name='uploadimage' accept='image/*' className='w-0 h-0'
+                                        <input type="file" name='uploadimage' accept='image/*' 
+                                        className='w-0 h-0'
                                           onChange={uploadimage}
                                         />
                                 </label>
@@ -241,7 +248,8 @@ const fetchData = async()=>{
                            </div>
                            <div className='w-full flex  items-center '> 
                                <button className='text-white bg-emerald-500 font-semibold rounded-lg ml-0 
-                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2' onClick={savedata}>Save Data</button>
+                               md:ml-auto w-full  text-lg border-none outline-none px-12 py-2'
+                                onClick={savedata}>Save Data</button>
                            </div>
           </div>
     </div>

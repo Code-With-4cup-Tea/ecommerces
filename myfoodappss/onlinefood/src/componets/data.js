@@ -16,8 +16,8 @@ export const  categories =[
     },
     {
         id:4,
-        name:"Sandwiches",
-        urlParamName:"sandwiches"
+        name:"Sandwiche",
+        urlParamName:"sandwiche"
     },
     {
         id:5,
@@ -26,8 +26,8 @@ export const  categories =[
     },
     {
         id:6,
-        name:"Wraps",
-        urlParamName:"wraps"
+        name:"Wrap",
+        urlParamName:"wrap"
     }
 
 ]

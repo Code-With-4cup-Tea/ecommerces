@@ -4,10 +4,15 @@ import {FaRupeeSign} from 'react-icons/fa'
 import { UseUserContext } from '../context/Usercontex'
 import { ACTION_TYPE } from '../reducer/Userrreducer'
 import { useState ,useEffect} from 'react'
+import { categories } from './data'
 
 const Allfood = () => {
     const {user,foodItems,dispatch,cartItems} = UseUserContext();
     const [foodlist,setFoodlist]  = useState()
+    const [filteredProducts, setFilteredProducts] = useState();
+    console.log("filteredProducts",filteredProducts)
+
+
 
     const addToCart = (itemsDetail)=>{
       dispatch({
@@ -22,36 +27,47 @@ const Allfood = () => {
   useEffect(()=>{
       localStorage.setItem("cartitem",JSON.stringify(cartItems))
   },[foodlist])
+  console.log("foodItems",foodItems)
 
   // for filter serach item
 
-//   const updateFilterValue = (event)=>{
-//          //  console.log(event.target.value)
-//           let inputext = event.target.value
+  const updateFilterValue = (event)=>{
+         //  console.log(event.target.value)
+          let inputext = event.target.value
+          console.log("inpute " ,inputext)
+        
 
-//          let filteredItem = cartItems.filter((allItem)=>{
-//                return  allItem.title.toLowerCase().includes(inputext.toLowerCase())
-//          })
-//         console.log("filterd",filteredItem)
+         let filteredItem = foodItems.filter(allItem=>
+                allItem.title.toLowerCase().includes(inputext.toLowerCase())
+         )
+        console.log("filterd ji",filteredItem)
+      setFilteredProducts(filteredItem)
 
-//   }
+      
 
+  }
+
+//for clear all
+
+const clearAll = ()=>{
+   setFilteredProducts()
+}
   
   return (
       <div className='flex flex-col w-full h-auto  '>
                <div className='flex flex-col justify-center gap-5 items-center '>
                         <div className='text-xl font-semibold text-textColor '>
-                                 <p>Total product: 521</p>
+                                 
                         </div>
                         <div className='full p-2 md:hidden'>
 
-                        {/*        input box                   */}
+                        {/*        input box      mobile             */}
 
                             <form onSubmit={(e)=>e.preventDefault()}>
                             <input type="text" placeholder='Search Product....'
                             name='texxt'
                            //  value=''
-                           //  onChange={updateFilterValue}
+                            onChange={updateFilterValue}
                             className=' text-base font-semibold p-1 border-none outline-none w-full
                             rounded-md' />
                             </form>
@@ -64,41 +80,34 @@ const Allfood = () => {
                    <div className='md:flex gap-3 flex-col  md:w-[20%] fixed top-64 hidden' >
                    <div className='md:w-[80%] p-2  md:flex '>
                              <form onSubmit={(e)=>e.preventDefault()}>
-                                {/*        input box                   */}
+                                {/*        input box  pc                 */}
                              <input type="text" placeholder='Search Product....'
                              name='texxt'
                            //  value=''
-                              // onChange={()=>updateFilterValue(event)}
+                              onChange={(event)=>updateFilterValue(event)}
                             className=' text-base font-semibold p-1 border-none outline-none w-full
                             rounded-md' />
                              </form>
                         </div>
                             <div className=' flex flex-col gap-2'>
                                   <p className='text-base font-semibold'>Category</p>
-                                  <div>
-                                      <ul>
-                                         <li>
-                                            All
-                                         </li>
-                                         <li>
-                                            Burger
-                                         </li>
-                                         <li>
-                                            BreakFast
-                                         </li>
-                                         <li>
-                                            Noodles
-                                         </li>
-                                         <li>
-                                            Thali
-                                         </li>
-                                         <li>
-                                            Sandwich
-                                         </li>
-                                         <li>
-                                            Wraps
-                                         </li>
-                                      </ul>
+                                  <div className=' flex flex-col items-start gap-2
+                                  font-light '>
+                                      {
+                                       categories && categories.map((currentItem)=>{
+                                            return (
+                                                   <button key={currentItem.id}
+                                                   value={currentItem.name}
+                                                   type='button'
+                                                   onClick={(event)=>updateFilterValue(event)}
+                                                   className='hover:text-orange-500'>
+                                                        {
+                                                         currentItem.name
+                                                        }
+                                                   </button>
+                                            )
+                                       })
+                                      }
                                   </div>
                             </div>
                             <div> 
@@ -107,7 +116,9 @@ const Allfood = () => {
                             </div>
                             <div className='text-base p-2 rounded-md bg-red-500 text-white font-semibold
                             w-20 '>
-                                    <button>Clear All</button>
+                                    <button
+                                      onClick={clearAll}
+                                    >Clear All</button>
                             </div>
                    </div>
                    <div>
@@ -119,7 +130,7 @@ const Allfood = () => {
                    justify-center'>
             
             {
-                foodItems && foodItems.map((itemsDetail)=>
+               foodItems && ( filteredProducts || foodItems).map((itemsDetail)=>
                 
                 <div key={itemsDetail.id}
             className='w-300 min-w-[250px] md:min-w-[300px] md:w-40 h-auto 
