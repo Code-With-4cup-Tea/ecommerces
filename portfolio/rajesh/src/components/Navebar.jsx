@@ -24,7 +24,7 @@ const Navebar = () => {
               <Link to='project' smooth duration={500}><li className='cursor-pointer hover:scale-105 
               duration-200'>Project</li></Link> 
                <Link to='education' smooth duration={500}><li className='cursor-pointer hover:scale-105 
-               duration-200'>Education</li></Link>
+               duration-200'>Curriculum vitae</li></Link>
                <Link to='contact' smooth duration={500}><li className='cursor-pointer hover:scale-105 
                duration-200'>Contact</li></Link>
             </ul>
@@ -51,7 +51,7 @@ const Navebar = () => {
          active && (
             <div className='md:hidden w-full h-screen bg-black flex justify-start gap-10
          items-center mt-3
-        absolute top-0 z-40 flex-col'>
+        fixed top-0 z-40 flex-col'>
             <section><h1 className='text-white text-2xl'>Rajesh</h1></section>
            
             <section >

@@ -9,7 +9,7 @@ import Contact from './components/Contact'
 
 const App = () => {
   return (
-    <div className='h-auto'>
+    <div className='h-auto bg-black flex flex-col'>
       
                 <Navebar/>
                 <Home/>
@@ -17,6 +17,8 @@ const App = () => {
                 <Skill/>
                 <Contact/>
                 <Sociallinks/>
+                
+               
             
                  
              
