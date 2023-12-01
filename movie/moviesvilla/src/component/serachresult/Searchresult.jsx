@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import { getWhishListConfiguration } from '../../store/wishlistslice'
 import { useDispatch } from 'react-redux'
 import { FaArrowRight,FaArrowLeft} from "react-icons/fa";
+let disabled;
 
 const Searchresult = () => {
     const [noodlelist,setNoodleList]  = useState()
@@ -36,11 +37,18 @@ const Searchresult = () => {
   const {items} = useSelector((state)=> state.wishlist)
  
 
-  const whislistCall = (items)=>{
-    dispatch(getWhishListConfiguration(items))
+  const whislistCall = (item)=>{
+
+    if(!items.find((added)=>added.id === item.id)){
+      console.log("items",item)
+      dispatch(getWhishListConfiguration(item))
    alert("❤️Added to WishLish❤️")
-   setNoodleList(items)
-  //  localStorage.setItem("wishStorage",JSON.stringify(items))
+   setNoodleList(item)} 
+   else{
+     alert("❌Movie all ready Added❌")
+   }
+  
+  
     
 }
 
@@ -48,6 +56,17 @@ useEffect(()=>{
 localStorage.setItem("wishStorage",JSON.stringify(items))
 },[noodlelist])
     
+// for pagnation disabled
+
+useEffect(()=>{
+     if(pageno ==1){
+      disabled= 'hidden'
+      console.log(disabled)
+     } else{
+        disabled = ''
+     }
+},[pageno])
+
   return (
     <div className='w-full h-auto mt-24'>
           <div className='w-full h-7 bg-black   flex justify-center items-center 
@@ -61,11 +80,11 @@ localStorage.setItem("wishStorage",JSON.stringify(items))
   className=' relative w-full my-5  flex  md:justify-center flex-wrap justify-center gap-5'>
 
       {
-        data?.results.map((items)=>{
-          const posterUrl = items.poster_path ? 
-          url.poster+items.poster_path : imagenot;
+        data?.results.map((item)=>{
+          const posterUrl = item.poster_path ? 
+          url.poster+item.poster_path : imagenot;
             return (
-              <div key={items.id}
+              <div key={item.id}
           className='w-225 min-w-[300px] md:min-w-[230px] md:w-40 h-auto shadow-md backdrop-blur-lg 
            hover:shadow-2xl rounded-md flex justify-center items-center flex-col '>
                 <div  className='w-full overflow-hidden rounded-md cursor-pointer '>
@@ -75,14 +94,14 @@ localStorage.setItem("wishStorage",JSON.stringify(items))
                      alt="img" />
                   </div>
                 <div className='w-full flex  flex-col'>
-                    <p className=' text-white '>{(items.title || items.name).slice(0,20)}</p>
-                    <p className='text-gray-500  '>{dayjs(items.release_date).format("MMM D,YYYY")}</p>
+                    <p className=' text-white '>{(item.title || item.name).slice(0,20)}</p>
+                    <p className='text-gray-500  '>{dayjs(item.release_date).format("MMM D,YYYY")}</p>
                 </div>
 
                 <motion.div 
                  whileTap={{scale:0.75}}
                 className='absolute top-3 right-0 cursor-pointer '
-                onClick={()=>whislistCall(items)}
+                onClick={()=>whislistCall(item)}
                
                  >
                 <AiTwotoneHeart className={'text-red-500 text-4xl hover:text-yellow-400'}/>
@@ -97,7 +116,7 @@ localStorage.setItem("wishStorage",JSON.stringify(items))
               </div>
               <div className='flex justify-center gap-5'>
                   <div 
-                  className='text-xl font-semibold text-white bg-black p-2 rounded-sm'
+                  className={`text-xl font-semibold text-white bg-black p-2 rounded-sm  ${disabled}`}
                   onClick={()=>setPageno(pageno-1)}>
                        <button><FaArrowLeft /></button>
                   </div>

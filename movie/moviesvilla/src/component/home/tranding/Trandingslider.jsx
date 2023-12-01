@@ -13,9 +13,11 @@ import { whishList } from '../../../store/wishlistslice'
 
 
 
+
 const Trandingslider = () => {
   //for fetching api data
   const [pageno,setPageno] = useState(1)
+ 
   
   console.log("page number is",pageno)
   const [trending,setTrending] = useState(null)
@@ -40,11 +42,18 @@ const Trandingslider = () => {
   const {items} = useSelector((state)=> state.wishlist)
 
 
-    const whislistCall = (items)=>{
-      dispatch(getWhishListConfiguration(items))
+    const whislistCall = (item)=>{
+
+      if(!items.find((added)=>added.id === item.id)){
+        console.log("items",item)
+        dispatch(getWhishListConfiguration(item))
      alert("❤️Added to WishLish❤️")
-     setNoodleList(items)
-    //  localStorage.setItem("wishStorage",JSON.stringify(items))
+     setNoodleList(item)} 
+     else{
+       alert("❌Movie all ready Added❌")
+     }
+    
+    
       
  }
  
@@ -69,6 +78,9 @@ const Trandingslider = () => {
   //   useEffect(()=>{
   //     traindings.current.scrollLeft +=trandingscrollvalue;
   //   },[trandingscrollvalue])
+
+  // if allready then disabled 
+  
   return (
        <div>
           <div className='w-full flex justify-center gap-8 flex-wrap'>
@@ -134,11 +146,11 @@ const Trandingslider = () => {
   className=' relative w-full my-5  flex  md:justify-start flex-wrap justify-center gap-5'>
 
       {
-        trending && trending.map((items)=>{
-          const posterUrl = items.poster_path ? 
-          url.poster+items.poster_path : imagenot;
+        trending && trending.map((item)=>{
+          const posterUrl = item.poster_path ? 
+          url.poster+item.poster_path : imagenot;
             return (
-              <div key={items.id}
+              <div key={item.id}
           className='w-225 min-w-[300px] md:min-w-[230px] md:w-40 h-auto shadow-md backdrop-blur-lg 
            hover:shadow-2xl rounded-md flex justify-center items-center flex-col '>
                 <div  className='w-full overflow-hidden rounded-md cursor-pointer '>
@@ -148,17 +160,17 @@ const Trandingslider = () => {
                      alt="img" />
                   </div>
                 <div className='w-full flex  flex-col'>
-                    <p className=' text-white '>{(items.title || items.name).slice(0,20)}</p>
-                    <p className='text-gray-500  '>{dayjs(items.release_date).format("MMM D,YYYY")}</p>
+                    <p className=' text-white '>{(item.title || item.name).slice(0,20)}</p>
+                    <p className='text-gray-500  '>{dayjs(item.release_date).format("MMM D,YYYY")}</p>
                 </div>
 
                 <motion.div 
                  whileTap={{scale:0.75}}
                 className='absolute top-3 right-0 cursor-pointer '
-                onClick={()=>whislistCall(items)}
-               
+                onClick={()=>whislistCall(item)}
+              
                  >
-                <AiTwotoneHeart className={'text-red-500 text-4xl hover:text-yellow-400'}/>
+                <AiTwotoneHeart className={'text-red-500 text-4xl'}/>
                 </motion.div>
                 
             </div>
@@ -171,17 +183,7 @@ const Trandingslider = () => {
 
               
 
-              <div className='flex justify-center gap-5'>
-                  <div onClick={()=>setPageno(pageno-1)}>
-                       <button>5</button>
-                  </div>
-                  <div >
-                        <p>6</p>
-                  </div>
-                  <div onClick={()=>setPageno(pageno+1)}>
-                       <button>7</button>
-                  </div>
-              </div>
+              
              
        </div>
        
