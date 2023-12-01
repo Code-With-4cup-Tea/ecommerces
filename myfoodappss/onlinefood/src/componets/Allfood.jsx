@@ -15,11 +15,16 @@ const Allfood = () => {
 
 
     const addToCart = (itemsDetail)=>{
-      dispatch({
-        type:ACTION_TYPE.SET_CART_ITEMS,
-        cartItems:[...cartItems,itemsDetail]
-      });
-      setFoodlist(cartItems)
+      if(!cartItems.find((added)=>added.id === itemsDetail.id)){
+        dispatch({
+          type:ACTION_TYPE.SET_CART_ITEMS,
+          cartItems:[...cartItems,itemsDetail]
+        });
+        setFoodlist(cartItems)
+      }else{
+        alert("🍔This Food Already Added🍔")
+      }
+      
   }
 
   // for local storage 
@@ -114,7 +119,8 @@ const clearAll = ()=>{
                                  
                                   <input type="range" min="50" max="400"/>
                             </div>
-                            <div className='text-base p-2 rounded-md bg-red-500 text-white font-semibold
+                            <div className='text-base p-2 rounded-md bg-red-500 text-white 
+                            font-semibold
                             w-20 '>
                                     <button
                                       onClick={clearAll}
@@ -126,7 +132,8 @@ const clearAll = ()=>{
                    </div>
 
                    {/*                    product listing         */}
-                   <div className='md:w-[80%] w-full  gap-4 flex flex-wrap md:absolute md:right-0 md:top-64 
+                   <div className='md:w-[80%] w-full  gap-4 flex flex-wrap md:absolute md:right-0
+                    md:top-64 
                    justify-center'>
             
             {

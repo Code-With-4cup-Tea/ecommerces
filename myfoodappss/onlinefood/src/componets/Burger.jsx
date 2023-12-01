@@ -8,17 +8,21 @@ import { motion } from 'framer-motion'
 
 const Burger = () => {
     const [burgerscrollvalue,setBurgerScrollvalue] = useState(0)
-    // const [cart,setCart] = useState([])
+   
     const {user,foodItems,dispatch,cartItems} = UseUserContext();
-    //this is use for local storage 
+    
     const [cartlist,setCartlist]  = useState()
     
       const addToCart = (burgerDetail)=>{
-        dispatch({
-          type:ACTION_TYPE.SET_CART_ITEMS,
-          cartItems:[...cartItems,burgerDetail]
-        });
-        setCartlist(cartItems)
+        if(!cartItems.find((added)=>added.id === burgerDetail.id)){
+          dispatch({
+            type:ACTION_TYPE.SET_CART_ITEMS,
+            cartItems:[...cartItems,burgerDetail]
+          });
+          setCartlist(cartItems)
+        }else{
+          alert("🍔This Burger Already Added🍔")
+        }
     }
 
     // for local storage 
@@ -29,22 +33,15 @@ const Burger = () => {
     
    
 
-    //for dispatch value form food items
     
-    // console.log("fooditems is ",foodItems[0].category)
-    //acess particular data using filter
-    // burgers contain only burgers value
+    
     console.log(foodItems)
     const burgers = foodItems?.filter((c)=>c.category ==="burger")
     console.log(burgers)
 
 
 
-// useEffect(()=>{
-//    addToCart();
-// },[cart])
-  
-// },[burgerscrollvalue])
+
 const rowBurger = useRef();
     // console.log("rwo",rowCategory)
     useEffect(()=>{
@@ -54,24 +51,30 @@ const rowBurger = useRef();
   return (
     <div className='w-full my-6'>
             <div className='w-full flex justify-between items-center'>
-            <p className='text-2xl font-semibold capitalize relative text-headingColor before:absolute before:rounded-lg 
-            before:w-16 before:h-1 before:-bottom-2 before:left-0  before:bg-gradient-to-tr from-orange-200 to-orange-600 before:content  '>Burger</p>
+            <p className='text-2xl font-semibold capitalize relative text-headingColor
+             before:absolute before:rounded-lg 
+            before:w-16 before:h-1 before:-bottom-2 before:left-0  before:bg-gradient-to-tr
+             from-orange-200 to-orange-600 before:content  '>Burger</p>
             <div className='md:flex  items-center flex gap-3 '>
             <div className='hidden md:flex gap-3'>
                <motion.div 
                onClick={()=>setBurgerScrollvalue(-600)}
                whileTap={{scale:0.75}}
-               className='w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-orange-600 to-orange-300  text-white font-extrabold cursor-pointer hover:bg-orange-700'>
+               className='w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br
+                from-orange-600 to-orange-300  text-white font-extrabold cursor-pointer
+                 hover:bg-orange-700'>
                        <MdOutlineNavigateBefore />
                </motion.div>
                <motion.div 
                onClick={()=>setBurgerScrollvalue(600)}
                whileTap={{scale:0.75}}
-               className='w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-orange-300 to-orange-600  text-white font-extrabold cursor-pointer hover:bg-orange-700'>
+               className='w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br
+                from-orange-300 to-orange-600  text-white font-extrabold cursor-pointer
+                 hover:bg-orange-700'>
                        <MdNavigateNext/>
                </motion.div>
             </div>
-               <button className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-2 py-1 rounded-md font-semibold'>View All</button>
+              
          
             </div>
             
@@ -110,7 +113,8 @@ const rowBurger = useRef();
                     <motion.button 
                     onClick={()=>addToCart(burgerDetail)}
                      whileTap={{scale:0.75}}
-                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10  rounded-md font-semibold'>ADD</motion.button>
+                    className=' bg-gradient-to-br from-orange-600 to-orange-300 text-white px-10 
+                     rounded-md font-semibold'>ADD</motion.button>
                     </div>
             </div>
                 
