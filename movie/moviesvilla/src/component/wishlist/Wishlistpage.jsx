@@ -88,7 +88,7 @@ const filterdfunction = (filteredItems)=>{
                         <motion.div 
                              whileTap={{scale:0.75}}
                              className='text-base font-semibold bg-red-500 text-white p-1
-                                  text-center  rounded-md '
+                                  text-center  rounded-md w-20'
                                   onClick={()=>filterFunction(wishitems.id)}>
                                      <button>Delete</button>
                         </motion.div>
