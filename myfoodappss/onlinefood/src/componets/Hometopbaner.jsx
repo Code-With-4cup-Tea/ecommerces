@@ -13,6 +13,7 @@ import bay from '../images/bay.png'
 import coldrink from '../images/cold-drink.png'
 import french from '../images/french-fries.png'
 import {motion} from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Hometopbaner = () => {
   return (
@@ -53,7 +54,10 @@ const Hometopbaner = () => {
               </div>
 
               <div >
-                    <button className='mt-8 rounded-md bg-gradient-to-br from-orange-100 to-orange-500 w-full px-4 py-2 hover:shadow-lg transition-all ease-in-out duration-100 md:w-auto font-extrabold'>Order Now</button>
+                    <Link to='/Allfood'><button className='mt-8 rounded-md bg-gradient-to-br from-orange-100
+                     to-orange-500 
+                    w-full px-4 py-2 hover:shadow-lg transition-all ease-in-out duration-100 md:w-auto font-extrabold'>
+                    Order Now</button></Link>
               </div>
               
         </div>

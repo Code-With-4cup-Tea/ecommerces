@@ -16,7 +16,7 @@ const Header = () => {
     console.log(logout)
   return (
    <> 
-<header className='fixed w-screen z-50 p-3 px-4 md:p-6 md:px-16 '>
+<header className='fixed w-screen z-50 p-3 px-4 md:p-6 md:px-16 bg-slate-100'>
     <div className='hidden md:flex h-full w-full items-center justify-between' >
         <Link to='/' className='flex justify-center items-center gap-2'>
                  <img src={logo} alt="logo" className='w-12 object-cover'/>
@@ -25,8 +25,10 @@ const Header = () => {
         </Link>
     <div className='flex items-center gap-8 '>
         <ul className='flex items-center gap-8'>
-                <li className='text-base text-textColor hover:text-orange-500 
+               <Link to='/'>
+               <li className='text-base text-textColor hover:text-orange-500 
                 duration-100 transition-all ease-in-out cursor-pointer' >Home</li>
+               </Link> 
                <Link to='/Allfood'><li className='text-base text-textColor hover:text-orange-500
                 duration-100 transition-all ease-in-out cursor-pointer' >All Food</li></Link> 
                 <li className='text-base text-textColor hover:text-orange-500 
@@ -74,7 +76,7 @@ const Header = () => {
                     </div>
 
         {  /* mobile menu*/ }
-            <div className='flex items-center justify-between md:hidden w-full h-full'>
+            <div className='flex items-center justify-between md:hidden w-full h-full  bg-slate-100'>
                 <Link to='/' className='flex justify-center items-center gap-2'>
                     <img src={logo} alt="logo" className='w-12 object-cover'/>
                     <p className= 'text-orange-500 font-bold'>Bhukha<span className='text-yellow-500'>
